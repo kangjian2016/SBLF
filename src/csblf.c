@@ -43,11 +43,12 @@
 #include "SampMean.h"
 #include "SampOutput.h"
 
-//#include <R.h>
+#include <R.h>
+#include <Rinternals.h>
 //#include <Rmath.h>
 
-void csblf(char** outputpath){
-
+SEXP csblf(SEXP outputpath){
+    Rprintf("started");
     //////////////////////////////////////////////////////////
     ///// GSL Random Number Generator Initialization /////
     //////////////////////////////////////////////////////////
@@ -62,31 +63,37 @@ void csblf(char** outputpath){
     ///// Input Data /////
     //////////////////////////////////////////////////////////
     // Input/Output data directory
-    char *inpathx, *inpath, *outpath;
+    char *inpathx, *inpath, *outpath; //, *outputpath;
     inpathx = (char *)calloc(500,sizeof(char));
     inpath = (char *)calloc(500,sizeof(char));
     outpath = (char *)calloc(500,sizeof(char));
+    
+    char *outppath = CHAR(asChar(outputpath));
+    Rprintf(outppath);
+    
+    //outputpath = (char *)calloc(500,sizeof(char));
     char dataSource[20] = "RealData"; // data from simulation or read data source
     int sim = strcmp(dataSource, "Simulation") == 0 ? 1 : 0;
     
     // simulated data pathway
     if (strcmp(dataSource, "Simulation") == 0) {
-        printf("Data from simulation study.\n");
+        //printf("Data from simulation study.\n");
         strcat(inpathx, "/home/mk/Desktop/ImageOnImageRegression-original/ImageOnImageRegression/SimulationStudy/Data/");
         strcat(inpath, "/home/mk/Desktop/ImageOnImageRegression-original/ImageOnImageRegression/SimulationStudy/Data/SpatialBayesLatent/");
         strcat(outpath, "/home/mk/Desktop/ImageOnImageRegression-original/ImageOnImageRegression/SimulationStudy/Result/SpatialBayesLatent/");
     } else if (strcmp(dataSource, "RealData") == 0 ) {
-        printf("Data from a subset of the real data.\n");
+        //printf("Data from a subset of the real data.\n");
         // strcat(inpathx, "/home/mk/Desktop/ImageOnImageRegression-original/ImageOnImageRegression/RealDataAnalysis/Data/");
-        strcat(inpathx, outputpath);
+        //strcat(outputpath, "/home/mk/Desktop/Rcsblf_test/");
+        strcat(inpathx, outppath);
         strcat(inpathx, "Data/");
         strcat(inpath, inpathx);
-        strcat(outpath, outputpath);
+        strcat(outpath, outppath);
         strcat(outpath, "Result/");
         // strcat(outpath, "/home/mk/Desktop/ImageOnImageRegression-original/ImageOnImageRegression/RealDataAnalysis/Result/");
     } else {
-        printf("Error: please specifiy the correct data source!\n");
-        exit(0);
+        //printf("Error: please specifiy the correct data source!\n");
+        //exit(0);
     }
     
     // Input data
@@ -104,7 +111,7 @@ void csblf(char** outputpath){
     int dd = 6.0;
     BF = genBasis(L, outpath, data, bandwidth, dd);
     int M = BF.M;
-    printf("NO. of Basis functions: %d\n", M);
+    //printf("NO. of Basis functions: %d\n", M);
     
     
     //////////////////////////////////////////////////////////
@@ -134,10 +141,10 @@ void csblf(char** outputpath){
     int t;
 
     // Start MCMC
-    printf("************ Start MCMC ************\n");
+    Rprintf("************ Start MCMC ************\n");
     for(t=1; t<=iter; t++){
         if (t % 50 == 0) {
-            printf("**** t=%d *****\n", t);
+            Rprintf("**** t=%d *****\n", t);
         }
         
         // Post sampling of Zinter
@@ -201,12 +208,12 @@ void csblf(char** outputpath){
     }
     end = clock();
     double mcmc_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-    printf("MCMC: %.2f secs\n", mcmc_time_used);
+    Rprintf("MCMC: %.2f secs\n", mcmc_time_used);
 
     ////////////////////////////////////////////////////////////
     ///// Release Memory /////
     ////////////////////////////////////////////////////////////
-    printf("Release Memory.\n");
+    Rprintf("Release Memory.\n");
     gsl_rng_free(r);
     free(outpath);
     free(inpath);
@@ -378,6 +385,8 @@ void csblf(char** outputpath){
     free(PostSamp.outcome_train_mean);
     free(PostSamp.outcome_train_mean2);
 
-    printf("Finish!\n");
+    Rprintf("MCMC complete.\n");
     // return 0;
+    
+    return R_NilValue;
 }

@@ -1,9 +1,9 @@
-Package: anRpackage
+Package: SBLF
 Type: Package
 Title: What the package does (short line)
 Version: 1.0
-Date: 2020-05-05
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
+Date: 2020-05-11
+Author: Cui Gao
+Maintainer: Michael Kleinsasser <ymkleinsa@umich.edu>
 Description: More about what it does (maybe more than one line)
-License: What license is it under?
+License: GPL-2
