@@ -1,9 +1,22 @@
 Package: SBLF
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
-Date: 2020-05-11
-Author: Cui Gao
-Maintainer: Michael Kleinsasser <ymkleinsa@umich.edu>
-Description: More about what it does (maybe more than one line)
-License: GPL-2
+Title: Fit Spatial Bayesian Latent Factor Models
+Version: 1.0.0.9000
+Authors@R:
+    c(
+    person(given = "Cui", family = "Guo", role = "aut", email = "cuiguo@umich.edu"),
+    person(given = "Jian", family = "Kang", role = "aut", email = "jiankang@umich.edu"),
+    person(given = "Michael", family = "Kleinsasser", role = "cre", email = "mkleinsa@umich.edu")
+    )
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Biarch: true
+Depends:
+    R (>= 3.5.0)
+Description: Fit spatial Bayesian  latent factor models. Uncover the latent brain image
+    structure using image on image regression.
+RoxygenNote: 7.1.0
+Roxygen: list(markdown = TRUE)
+URL: https://github.com/umich-biostatistics/SBLF
+BugReports: https://github.com/umich-biostatistics/SBLF/issues

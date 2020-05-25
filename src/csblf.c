@@ -147,25 +147,25 @@ SEXP csblf(SEXP outputpath){
             Rprintf("**** t=%d *****\n", t);
         }
         // Post sampling of Zinter
-        Rprintf("\n0");
+        //Rprintf("\n0");
         Zinter_samp(nobs, L, K, PostSamp, data, BF, r, singular);
-        Rprintf("\n01");
+        //Rprintf("\n01");
         err2inv_u_samp(L, PostSamp, data, r);
-        Rprintf("\n02");
+        //Rprintf("\n02");
         err2inv_e_samp(nobs, L, PostSamp, data, BF, r);
-        Rprintf("\n1");
+        //Rprintf("\n1");
         // Post sampling of theta
         theta_samp(nobs, L, K, PostSamp, data, BF, r, singular);
-        Rprintf("\n2");
+        //Rprintf("\n2");
         // Post sampling of Phi2Inv
         phi2inv_samp(K, nobs, L, PostSamp, data, BF, r);
-        Rprintf("\n3");
+        //Rprintf("\n3");
         // Post sampling of Loadings and its hyperparameters
         load_samp(K, L, nobs, PostSamp, BF, r);
-        Rprintf("\n4");
+        //Rprintf("\n4");
         // Update latent variables
         latent_samp(L, K, nobs, PostSamp, data, BF, r);
-        Rprintf("\n5");
+        //Rprintf("\n5");
         // Update mu
         mu_samp(L, K, nobs, PostSamp, data, BF, r);
         

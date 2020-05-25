@@ -3,6 +3,39 @@ Rcsblf <- function(outpath) {
   .Call("csblf", as.character(outpath))
 }
 
+#' Fit Spatial Bayesian Latent Factor Models
+#'
+#' Use this function to fit spatial Bayesian latent factor models given
+#' the prepared input data sets. Please also comment on the important
+#' output the user should be expecting.
+#' 
+#' The parameters prefixed with "x" are imaging predictor data, and
+#' the parameters prefixed with "z" are imaging outcomes.
+#' 
+#' @param xtrain training data set of imaging predictors. Sample size is `ntrain * (P * image_len)`
+#' @param xtest test data set of imaging predictors. sample size is `(ntotal-ntrain) * (P * image_len)`
+#' @param ztrain training data set of imaging outcomes. Sample size is `(ntrain * image_len)`
+#' @param ztest test data set of imaging outcomes. Sample size is `((ntotal-ntrain) * image_len)`
+#' @param voxel_loc matrix of voxel coordinates.
+#'
+#' @details Specify imprtant details to the user about the use
+#' of this function. Please comment.
+#' 
+#' Data sets should be entered an unnamed matrices (see examples for illustration).
+#' The data matrices should not have rownames or column names.
+#' 
+#' @references Please add your paper reference.
+#' 
+#' @return A list which contains
+#' 
+#'
+#' @examples 
+#' \donttest{
+#' 
+#' }
+#'
+#' @export
+
 SBLF <- function(xtrain, xtest, ztrain, ztest, voxel_loc) {
   
   temp_path = paste(tempdir(), '/', sep = '')
@@ -43,20 +76,22 @@ SBLF <- function(xtrain, xtest, ztrain, ztest, voxel_loc) {
   #read results into R from tmp/Result/
   results = vector(mode = 'list', length = length(list.files(result_path)))
   names(results) <- list.files(result_path)
-  mapply(X = list.files(result_path), Y = 1:length(results),
-    FUN = function(file, position) {
-      results[[position]] <- as.matrix(read.table(paste0(result_path, X, sep = ''), quote="\"", comment.char=""))
+  X = list.files(result_path)
+  Xnames = gsub('.txt', '', X)
+  
+  results = 
+  lapply(X = X,
+    FUN = function(X) {
+      as.matrix(read.table(paste0(result_path, X, sep = ''), quote="\"", comment.char=""))
     })
-  
-  
-  # pred_train <- as.matrix(read.table(paste0(resultpath_temp, "PostMean_Out_train.txt", sep=""),
-  #                                    quote="\"", comment.char=""))
-  # pred_test <- as.matrix(read.table(paste0(resultpath_temp, "PostMean_Out_test.txt", sep=""),
-  #                                   quote="\"", comment.char=""))
-  # latent <- as.matrix(read.table(paste0(resultpath_temp, "PostMean_Latent.txt"), quote="\"", comment.char=""))
-  # out <- list(pred_train=pred_train, pred_test=pred_test, latent=latent)
-
+  names(results) <- Xnames
   
   # return results
-  return(results)
+  return(list(
+    pred_train = results[['PostMean_Out_train']],
+    pred_test = results[['PostMean_Out_test']],
+    latent = results[['PostMean_Latent']],
+    draws = results
+  ))
+  
 }
