@@ -18,16 +18,21 @@ Rcsblf <- function(outpath) {
 #' @param ztest test data set of imaging outcomes. Sample size is `((ntotal-ntrain) * image_len)`
 #' @param voxel_loc matrix of voxel coordinates.
 #'
-#' @details Specify imprtant details to the user about the use
+#' @details Specify important details to the user about the use
 #' of this function. Please comment.
 #' 
-#' Data sets should be entered an unnamed matrices (see examples for illustration).
-#' The data matrices should not have rownames or column names.
+#' The function expects all data to be entered as matrices with the dimensions
+#' outlined in each of the parameter arguments.
 #' 
 #' @references Please add your paper reference.
 #' 
 #' @return A list which contains
-#' 
+#' \itemize{
+#'  \item{"pred_train"}{}
+#'  \item{"pred_test"}{}
+#'  \item{"latent"}{}
+#'  \item{"draws"}{}
+#' }
 #'
 #' @examples 
 #' \donttest{
@@ -69,7 +74,7 @@ SBLF <- function(xtrain, xtest, ztrain, ztest, voxel_loc) {
   n_test <- nrow(xtest)
   ROI_sizes <- matrix(data = c(1, n_train, image_len, n_predictors, n_test), ncol = 1)
   write.table(x = ROI_sizes, file = paste(data_path, 'ROI_sizes.txt', sep = '/'), row.names = FALSE, col.names = FALSE)
-
+  cat('test')
   #Call c routine, which writes results to tmp/Result/
   creturn = Rcsblf(temp_path)
   
@@ -86,12 +91,26 @@ SBLF <- function(xtrain, xtest, ztrain, ztest, voxel_loc) {
     })
   names(results) <- Xnames
   
+  pred_train = results[['PostMean_Out_train']]
+  pred_test = results[['PostMean_Out_test']]
+  latent = results[['PostMean_Latent']]
+  draws = results
+  
+  err_train = pred_train - ztrain
+  mse_train = mean(err_train^2)  
+  
+  err_test <- pred_test - ztest
+  mspe_test <- mean(err_test^2)
+  
+  err <- matrix(c(mse_train, mspe_test), ncol=2)
+  colnames(err) <- c("MSE(training)", "MSPE(test)")
+  
   # return results
   return(list(
-    pred_train = results[['PostMean_Out_train']],
-    pred_test = results[['PostMean_Out_test']],
-    latent = results[['PostMean_Latent']],
-    draws = results
+    err = err, 
+    pred_train = pred_train, 
+    pred_test = pred_test, 
+    latent = latent
   ))
   
 }

@@ -201,12 +201,12 @@ struct BasisFunc genBasis(int L, const char * basispath, struct Inputdata data, 
     for(l=0; l<L; l++){
         char * pb = (char*)calloc(500, sizeof(char));
         strcpy(pb, outb);
-        Rprintf(sl, "%d", l+1);
+        sprintf(sl, "%d", l+1);
         strcat(pb, sl);
         strcat(pb, ".txt");
         FILE * fb = fopen(pb, "wb");
         if(fb == NULL){
-            Rprintf("Cannot open file for basis.\n");
+            printf("Cannot open file for basis.\n");
         }
         for(i=0; i<data.parcel_len[l]; i++){
             for(j=0; j<BF.Ml[l]; j++){
@@ -224,7 +224,7 @@ struct BasisFunc genBasis(int L, const char * basispath, struct Inputdata data, 
         strcat(pbk, ".txt");
         FILE * fbk = fopen(pbk, "wb");
         if(fbk == NULL){
-            Rprintf("Cannot open file for basis_kernel.\n");
+            printf("Cannot open file for basis_kernel.\n");
         }
         for(i=0; i<BF.Ml[l]; i++){
             for(j=0; j<dim_image; j++){

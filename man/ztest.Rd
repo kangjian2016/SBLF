@@ -3,8 +3,7 @@
 \docType{data}
 \name{ztest}
 \alias{ztest}
-\title{This matrix contains a randomly selected subset
-of real imaging outcome data for testing.}
+\title{Randomly selected subset of real imaging outcome data for testing}
 \format{
 An object of class \code{matrix} with 10 rows and 315 columns.
 }
@@ -12,9 +11,9 @@ An object of class \code{matrix} with 10 rows and 315 columns.
 ztest
 }
 \description{
-The data set contains 1 imaging outcome
-and 315 voxels per image. \code{1 * 315 = 315} columns,
-and 10 rows.
+This matrix contains a randomly selected subset of real imaging outcome
+data for testing. The data set contains 1 imaging outcome
+and 315 voxels per image. \code{1 * 315 = 315} columns, and 10 rows.
 }
 \details{
 This outcome is from the Emotion task domain.

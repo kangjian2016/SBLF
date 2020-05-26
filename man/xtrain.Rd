@@ -3,8 +3,7 @@
 \docType{data}
 \name{xtrain}
 \alias{xtrain}
-\title{This matrix contains a randomly selected subset
-of real imaging predictor data for training.}
+\title{Randomly selected subset of real imaging predictor data for training}
 \format{
 An object of class \code{matrix} with 50 rows and 10080 columns.
 }
@@ -12,8 +11,8 @@ An object of class \code{matrix} with 50 rows and 10080 columns.
 xtrain
 }
 \description{
-The data set contains 32 imaging predictors
-and 315 voxels per image. \verb{32 * 315 = 10,000} columns,
-and 50 rows.
+This matrix contains a randomly selected subset of real imaging predictor
+data for training. The data set contains 32 imaging predictors
+and 315 voxels per image. \verb{32 * 315 = 10,000} columns, and 50 rows.
 }
 \keyword{datasets}

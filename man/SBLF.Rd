@@ -29,11 +29,11 @@ output the user should be expecting.
 The parameters prefixed with "x" are imaging predictor data, and
 the parameters prefixed with "z" are imaging outcomes.
 
-Specify imprtant details to the user about the use
+Specify important details to the user about the use
 of this function. Please comment.
 
-Data sets should be entered an unnamed matrices (see examples for illustration).
-The data matrices should not have rownames or column names.
+The function expects all data to be entered as matrices with the dimensions
+outlined in each of the parameter arguments.
 }
 \examples{
 \donttest{

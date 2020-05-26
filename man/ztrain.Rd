@@ -3,8 +3,7 @@
 \docType{data}
 \name{ztrain}
 \alias{ztrain}
-\title{This matrix contains a randomly selected subset
-of real imaging outcome data for training.}
+\title{Randomly selected subset of real imaging outcome data for training}
 \format{
 An object of class \code{matrix} with 50 rows and 315 columns.
 }
@@ -12,9 +11,9 @@ An object of class \code{matrix} with 50 rows and 315 columns.
 ztrain
 }
 \description{
-The data set contains 1 imaging outcome
-and 315 voxels per image. \code{1 * 315 = 315} columns,
-and 50 rows.
+This matrix contains a randomly selected subset of real imaging outcome
+data for training. The data set contains 1 imaging outcome
+and 315 voxels per image. \code{1 * 315 = 315} columns, and 50 rows.
 }
 \details{
 This outcome is from the Emotion task domain.

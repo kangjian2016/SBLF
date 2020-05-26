@@ -30,8 +30,8 @@ struct Inputdata input(const char * inpathx, const char * inpath, const int sim)
     FILE *rsizes = fopen(sizes, "r");
     
     if(rsizes == NULL){
-        perror("Error");
-        printf("Cannot open file for ROI_sizes.txt\n");
+        Rprintf("Error");
+        Rprintf("Cannot open file for ROI_sizes.txt\n");
         exit(1);
     }
     for(i=0; i<5; i++) {
@@ -57,15 +57,15 @@ struct Inputdata input(const char * inpathx, const char * inpath, const int sim)
         data.parcel_len[0] = image_len;
         data.parcel_len_sum[0] = 0;
     }else{
-        printf("Multiple parcels are not workable. Currently the code works for a single parcel only!\n");
+        Rprintf("Multiple parcels are not workable. Currently the code works for a single parcel only!\n");
         exit(0);
     }
     
-    printf("Data Info: \n");
-    printf("    sample size: %d (training), %d (test)\n", nobs, nts);
-    printf("    voxels: %d\n", image_len);
-    printf("    parcels: %d\n", L);
-    printf("    predictors: %d\n", P);
+    Rprintf("Data Info: \n");
+    Rprintf("    sample size: %d (training), %d (test)\n", nobs, nts);
+    Rprintf("    voxels: %d\n", image_len);
+    Rprintf("    parcels: %d\n", L);
+    Rprintf("    predictors: %d\n", P);
     
     ///// Input axes of images
     int dim_image = 3; // images from real data are 3-Dimensional
@@ -79,7 +79,7 @@ struct Inputdata input(const char * inpathx, const char * inpath, const int sim)
     
     FILE *ra = fopen(sa, "r");
     if(ra == NULL){
-        printf("Cannot open file for ROI_axes.txt\n");
+        Rprintf("Cannot open file for ROI_axes.txt\n");
     }
     for(i=0; i<image_len; i++){
         for(j=0; j<dim_image; j++){
@@ -96,7 +96,7 @@ struct Inputdata input(const char * inpathx, const char * inpath, const int sim)
 
     
     ///// Input task images - outcomes
-    printf("Reading imaging outcomes\n");
+    Rprintf("Reading imaging outcomes\n");
     
     // training
     data.Z = (float *)calloc(nobs*image_len, sizeof(float));
@@ -105,7 +105,7 @@ struct Inputdata input(const char * inpathx, const char * inpath, const int sim)
     strcat(sz, "ROI_task.txt");
     FILE *rz = fopen(sz, "r");
     if(rz == NULL){
-        printf("Cannot open file for ROI_task.txt\n");
+        Rprintf("Cannot open file for ROI_task.txt\n");
     }
     for(i=0; i<nobs; i++){
         for(j=0; j<image_len; j++){
@@ -143,7 +143,7 @@ struct Inputdata input(const char * inpathx, const char * inpath, const int sim)
         strcat(szts, "ROI_task_test.txt");
         FILE *rzts = fopen(szts, "r");
         if(rzts == NULL){
-            printf("Cannot open file for ROI_task.txt for testing set\n");
+            Rprintf("Cannot open file for ROI_task.txt for testing set\n");
         }
         for(i=0; i<nts; i++){
             for(j=0; j<image_len; j++){
@@ -175,7 +175,7 @@ struct Inputdata input(const char * inpathx, const char * inpath, const int sim)
     
     
     ///// Input Feature images - predictors
-    printf("Reading imaging predictors\n");
+    Rprintf("Reading imaging predictors\n");
     
     // training
     data.X = (float *)calloc(nobs*image_len*P, sizeof(float));
@@ -184,7 +184,7 @@ struct Inputdata input(const char * inpathx, const char * inpath, const int sim)
     strcat(sx, "ROI_dat_mat.txt");
     FILE *rx = fopen(sx, "r");
     if(rx == NULL){
-        printf("Cannot open file for ROI_dat_mat.txt\n");
+        Rprintf("Cannot open file for ROI_dat_mat.txt\n");
     }
     for(i=0; i<nobs; i++){
         for(j=0; j<image_len*P; j++){
@@ -223,7 +223,7 @@ struct Inputdata input(const char * inpathx, const char * inpath, const int sim)
         strcat(sxts, "ROI_dat_mat_test.txt");
         FILE *rxts = fopen(sxts, "r");
         if(rxts == NULL){
-            printf("Cannot open file for ROI_dat_mat.txt for testing set\n");
+            Rprintf("Cannot open file for ROI_dat_mat.txt for testing set\n");
         }
         for(i=0; i<nts; i++){
             for(j=0; j<image_len*P; j++){

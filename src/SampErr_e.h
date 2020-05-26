@@ -1,8 +1,8 @@
 void err2inv_e_samp(const int nobs, const int L, struct Sampling PostSamp, const struct Inputdata data, const struct BasisFunc BF, const gsl_rng *r){
     int i, j, l,m;
 
-    //printf("\n########\nOld_Err2inv_e: ");
-    //printf("%.6f\n", PostSamp.err2inv_e[0]);
+    Rprintf("\n########\nOld_Err2inv_e: ");
+    Rprintf("%.6f\n", PostSamp.err2inv_e[0]);
     
     double post_b = 0.0;
     double temp=0.0;
@@ -41,8 +41,8 @@ void err2inv_e_samp(const int nobs, const int L, struct Sampling PostSamp, const
 
     }
 
-    //printf("New_Err2inv_e: ");
-    //printf("%.6f\n", PostSamp.err2inv_e[0]);
+    Rprintf("New_Err2inv_e: ");
+    Rprintf("%.6f\n", PostSamp.err2inv_e[0]);
 }
 
 

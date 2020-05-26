@@ -3,8 +3,7 @@
 \docType{data}
 \name{xtest}
 \alias{xtest}
-\title{This matrix contains a randomly selected subset
-of real imaging predictor data for testing.}
+\title{Randomly selected subset of real imaging predictor data for testing}
 \format{
 An object of class \code{matrix} with 10 rows and 10080 columns.
 }
@@ -12,8 +11,8 @@ An object of class \code{matrix} with 10 rows and 10080 columns.
 xtest
 }
 \description{
-The data set contains 32 imaging predictors
-and 315 voxels per image. \verb{32 * 315 = 10,000} columns,
-and 10 rows.
+This matrix contains a randomly selected subset of real imaging predictor
+data for testing. The data set contains 32 imaging predictors
+and 315 voxels per image. \verb{32 * 315 = 10,000} columns, and 10 rows.
 }
 \keyword{datasets}

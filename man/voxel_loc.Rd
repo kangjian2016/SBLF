@@ -3,7 +3,7 @@
 \docType{data}
 \name{voxel_loc}
 \alias{voxel_loc}
-\title{Matrix of coordinates of voxel locations.}
+\title{Coordinates of voxel locations}
 \format{
 An object of class \code{matrix} with 315 rows and 3 columns.
 }
@@ -11,7 +11,7 @@ An object of class \code{matrix} with 315 rows and 3 columns.
 voxel_loc
 }
 \description{
-The number of rows should match the number of voxels. In
-this example, there are 315 voxels.
+Matrix of coordinates of voxel locations. The number of rows should match
+the number of voxels. In this example, there are 315 voxels.
 }
 \keyword{datasets}
