@@ -8,7 +8,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(pztr, "PostOut_train.txt");
     FILE * fztr = fopen(pztr, "a+");
     if(fztr == NULL){
-        printf("Cannot open file for PostOut_train.\n");
+        Rprintf("Cannot open file for PostOut_train.\n");
     }
     for(i=0; i<nobs; i++){
         
@@ -30,7 +30,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
         strcat(pzts, "PostOut_test.txt");
         FILE * fzts = fopen(pzts, "a+");
         if(fzts == NULL){
-            printf("Cannot open file for PostOut_test.\n");
+            Rprintf("Cannot open file for PostOut_test.\n");
         }
         for(i=0; i<nts; i++){
             for(l=0; l<L; l++){
@@ -53,7 +53,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(pzInter, "PostZInter.txt");
     FILE * fzInter = fopen(pzInter, "a+");
     if(fzInter == NULL){
-        printf("Cannot open file for PostZInter.\n");
+        Rprintf("Cannot open file for PostZInter.\n");
     }
     for(l=0; l<L; l++) {
         parcel_len = data.parcel_len[l];
@@ -73,7 +73,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(ptheta, "PostTheta.txt");
     FILE * ftheta = fopen(ptheta, "a+");
     if(ftheta == NULL){
-        printf("Cannot open file for PostTheta.\n");
+        Rprintf("Cannot open file for PostTheta.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -93,7 +93,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(pthetaerr, "PostThetaErr.txt");
     FILE * fthetaerr = fopen(pthetaerr, "a+");
     if(fthetaerr == NULL){
-        printf("Cannot open file for PostThetaErr.\n");
+        Rprintf("Cannot open file for PostThetaErr.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -115,7 +115,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
         strcat(pthetats, "PostTheta_test.txt");
         FILE * fthetats = fopen(pthetats, "a+");
         if(fthetats == NULL){
-            printf("Cannot open file for PostTheta_test.\n");
+            Rprintf("Cannot open file for PostTheta_test.\n");
         }
         for(i=0; i<nts; i++){
             for(l=0; l<L; l++){
@@ -137,7 +137,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(pload, "PostLoading.txt");
     FILE * fload = fopen(pload, "a+");
     if(fload == NULL){
-        printf("Cannot open file for PostLoading.\n");
+        Rprintf("Cannot open file for PostLoading.\n");
     }
     
     for(l=0; l<L; l++){
@@ -159,7 +159,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(ploads , "PostLoadingStar.txt");
     FILE * floads = fopen(ploads, "a+");
     if(floads == NULL){
-        printf("Cannot open file for PostLoadingStar.\n");
+        Rprintf("Cannot open file for PostLoadingStar.\n");
     }
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
@@ -179,7 +179,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(platent, "PostLatent.txt");
     FILE * flatent = fopen(platent, "a+");
     if(flatent == NULL){
-        printf("Cannot open file for PostLatent.\n");
+        Rprintf("Cannot open file for PostLatent.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -199,7 +199,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(platents, "PostLatentStar.txt");
     FILE * flatents = fopen(platents, "a+");
     if(flatents == NULL){
-        printf("Cannot open file for PostLatentStar.\n");
+        Rprintf("Cannot open file for PostLatentStar.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -219,7 +219,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(platenterr, "PostLatentErr.txt");
     FILE * flatenterr = fopen(platenterr, "a+");
     if(flatenterr == NULL){
-        printf("Cannot open file for PostLatentErr.\n");
+        Rprintf("Cannot open file for PostLatentErr.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -240,7 +240,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
         strcat(platentts, "PostLatent_test.txt");
         FILE * flatentts = fopen(platentts, "a+");
         if(flatentts == NULL){
-            printf("Cannot open file for PostLatent_test.\n");
+            Rprintf("Cannot open file for PostLatent_test.\n");
         }
         for(i=0; i<nts; i++){
             for(l=0; l<L; l++){
@@ -263,7 +263,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(pphi, "PostPhi2Inv.txt");
     FILE * fphi = fopen(pphi, "a+");
     if(fphi == NULL){
-        printf("Cannot open file for PostPhi2Inv.\n");
+        Rprintf("Cannot open file for PostPhi2Inv.\n");
     }
     for(k=0; k<K*L; k++){
         fprintf(fphi, "%f ", PostSamp.Phi2Inv[k]);
@@ -279,7 +279,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(pb, "PostBeta.txt");
     FILE * fb = fopen(pb, "a+");
     if(fb == NULL){
-        printf("Cannot open file for PostBeta.\n");
+        Rprintf("Cannot open file for PostBeta.\n");
     }
     for(l=0; l<L; l++){
         parcel_len = data.parcel_len[l];
@@ -299,7 +299,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(pbs, "PostBetaStar.txt");
     FILE * fbs = fopen(pbs, "a+");
     if(fbs == NULL){
-        printf("Cannot open file for PostBetaStar.\n");
+        Rprintf("Cannot open file for PostBetaStar.\n");
     }
     for(l=0; l<L; l++){
         parcel_len = data.parcel_len[l];
@@ -319,7 +319,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(pa, "PostAlpha.txt");
     FILE * fa = fopen(pa, "a+");
     if(fa == NULL){
-        printf("Cannot open file for PostAlpha.\n");
+        Rprintf("Cannot open file for PostAlpha.\n");
     }
     for(i=0; i<K; i++){
         for(l=0; l<L;l++){
@@ -339,7 +339,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(pas, "PostAlphaStar.txt");
     FILE * fas = fopen(pas, "a+");
     if(fas == NULL){
-        printf("Cannot open file for PostAlphaStar.\n");
+        Rprintf("Cannot open file for PostAlphaStar.\n");
     }
     for(i=0; i<K; i++){
         for(l=0; l<L;l++){
@@ -360,7 +360,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(pgamma, "PostGamma.txt");
     FILE * fgamma = fopen(pgamma, "a+");
     if(fgamma == NULL){
-        printf("Cannot open file for PostGamma.\n");
+        Rprintf("Cannot open file for PostGamma.\n");
     }
     for(k=0; k<P*L; k++){
         fprintf(fgamma, "%f ", PostSamp.gamma[k]);
@@ -375,7 +375,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(pw, "PostWeight.txt");
     FILE * fw = fopen(pw, "a+");
     if(fw== NULL){
-        printf("Cannot open file for PostWeight.\n");
+        Rprintf("Cannot open file for PostWeight.\n");
     }
     for(k=0; k<L; k++){
         fprintf(fw, "%f ", PostSamp.w[k]);
@@ -390,7 +390,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(pe, "PostErr2inv_e.txt");
     FILE * fe = fopen(pe, "a+");
     if(fe == NULL){
-        printf("Cannot open file for PostErr2inv_e.\n");
+        Rprintf("Cannot open file for PostErr2inv_e.\n");
     }
     fprintf(fe, "%f\n", PostSamp.err2inv_e[0]);
     fprintf(fe, "\n");
@@ -403,7 +403,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(peps, "PostErr2inv_eps.txt");
     FILE * feps = fopen(peps, "a+");
     if(feps == NULL){
-        printf("Cannot open file for PostErr2inv_eps.\n");
+        Rprintf("Cannot open file for PostErr2inv_eps.\n");
     }
     fprintf(feps, "%f\n", PostSamp.err2inv_eps[0]);
     fclose(feps);
@@ -415,7 +415,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(pzeta, "PostErr2inv_zeta.txt");
     FILE * fzeta = fopen(pzeta, "a+");
     if(fzeta == NULL){
-        printf("Cannot open file for PostErr2inv_zeta.\n");
+        Rprintf("Cannot open file for PostErr2inv_zeta.\n");
     }
     fprintf(fzeta, "%f\n", PostSamp.err2inv_zeta[0]);
     fprintf(fzeta, "\n");
@@ -428,7 +428,7 @@ void output_samp(const char * outpath, const int t, const int burnin, const int 
     strcat(pmu, "PostMu.txt");
     FILE * fmu = fopen(pmu, "a+");
     if(fmu == NULL){
-        printf("Cannot open file for PostMuStar.\n");
+        Rprintf("Cannot open file for PostMuStar.\n");
     }
     for(i=0; i<nobs; i++){
         

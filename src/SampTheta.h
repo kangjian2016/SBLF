@@ -41,7 +41,7 @@ void theta_samp(int nobs, int L, int K, struct Sampling PostSamp, struct Inputda
         // Cholesky decomposition
         int status = gsl_linalg_cholesky_decomp(theta_prec);
         if(status){
-            printf("Failed Cholesky Decomposition for Theta\n");
+            Rprintf("Failed Cholesky Decomposition for Theta\n");
             goto stop;
         }
         

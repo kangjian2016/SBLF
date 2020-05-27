@@ -15,7 +15,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(pztr, "PostOut_train.txt");
     FILE * fztr = fopen(pztr, "wb");
     if(fztr == NULL){
-        printf("Cannot open file for PostOut_train.\n");
+        Rprintf("Cannot open file for PostOut_train.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -36,7 +36,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
         strcat(pzts, "PostOut_test.txt");
         FILE * fzts = fopen(pzts, "wb");
         if(fzts == NULL){
-            printf("Cannot open file for PostOut_test.\n");
+            Rprintf("Cannot open file for PostOut_test.\n");
         }
         for(i=0; i<nts; i++){
             for(l=0; l<L; l++){
@@ -58,7 +58,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(pzInter, "PostZInter.txt");
     FILE * fzInter = fopen(pzInter, "wb");
     if(fzInter == NULL){
-        printf("Cannot open file for PostZInter.\n");
+        Rprintf("Cannot open file for PostZInter.\n");
     }
     for(l=0; l<L; l++) {
         parcel_len = data.parcel_len[l];
@@ -77,7 +77,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(ptheta, "PostTheta.txt");
     FILE * ftheta = fopen(ptheta, "wb");
     if(ftheta == NULL){
-        printf("Cannot open file for PostTheta.\n");
+        Rprintf("Cannot open file for PostTheta.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -97,7 +97,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(pthetaerr, "PostThetaErr.txt");
     FILE * fthetaerr = fopen(pthetaerr, "wb");
     if(fthetaerr == NULL){
-        printf("Cannot open file for PostThetaErr.\n");
+        Rprintf("Cannot open file for PostThetaErr.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -118,7 +118,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
         strcat(pthetats, "PostTheta_test.txt");
         FILE * fthetats = fopen(pthetats, "wb");
         if(fthetats == NULL){
-            printf("Cannot open file for PostTheta_test.\n");
+            Rprintf("Cannot open file for PostTheta_test.\n");
         }
         for(i=0; i<nts; i++){
             for(l=0; l<L; l++){
@@ -141,7 +141,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(ploads, "PostLoadingStar.txt");
     FILE * floads = fopen(ploads, "wb");
     if(floads == NULL){
-        printf("Cannot open file for PostLoadingStar.\n");
+        Rprintf("Cannot open file for PostLoadingStar.\n");
     }
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
@@ -161,7 +161,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(pload , "PostLoading.txt");
     FILE * fload = fopen(pload, "wb");
     if(fload == NULL){
-        printf("Cannot open file for PostLoading.\n");
+        Rprintf("Cannot open file for PostLoading.\n");
     }
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
@@ -183,7 +183,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(platent, "PostLatent.txt");
     FILE * flatent = fopen(platent, "wb");
     if(flatent == NULL){
-        printf("Cannot open file for PostLatent.\n");
+        Rprintf("Cannot open file for PostLatent.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -205,7 +205,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(platents, "PostLatentStar.txt");
     FILE * flatents = fopen(platents, "wb");
     if(flatents == NULL){
-        printf("Cannot open file for PostLatentStar.\n");
+        Rprintf("Cannot open file for PostLatentStar.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -224,7 +224,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(platenterr, "PostLatentErr.txt");
     FILE * flatenterr = fopen(platenterr, "wb");
     if(flatenterr == NULL){
-        printf("Cannot open file for PostLatentErr.\n");
+        Rprintf("Cannot open file for PostLatentErr.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -245,7 +245,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
         strcat(platentts, "PostLatent_test.txt");
         FILE * flatentts = fopen(platentts, "wb");
         if(flatentts == NULL){
-            printf("Cannot open file for PostLatent_test.\n");
+            Rprintf("Cannot open file for PostLatent_test.\n");
         }
         for(i=0; i<nts; i++){
             for(l=0; l<L; l++){
@@ -268,7 +268,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(pphi, "PostPhi2Inv.txt");
     FILE * fphi = fopen(pphi, "wb");
     if(fphi == NULL){
-        printf("Cannot open file for PostPhi2Inv.\n");
+        Rprintf("Cannot open file for PostPhi2Inv.\n");
     }
     for(k=0; k<K*L; k++){
         fprintf(fphi, "%f ", PostSamp.Phi2Inv[k]);
@@ -283,7 +283,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(pbeta, "PostBeta.txt");
     FILE * fbeta = fopen(pbeta, "wb");
     if(fbeta == NULL){
-        printf("Cannot open file for PostBeta.\n");
+        Rprintf("Cannot open file for PostBeta.\n");
     }
     for(l=0; l<L; l++){
         parcel_len = data.parcel_len[l];
@@ -303,7 +303,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(pbetas, "PostBetaStar.txt");
     FILE * fbetas = fopen(pbetas, "wb");
     if(fbetas == NULL){
-        printf("Cannot open file for PostBetaStar.\n");
+        Rprintf("Cannot open file for PostBetaStar.\n");
     }
     for(l=0; l<L; l++){
         parcel_len = data.parcel_len[l];
@@ -323,7 +323,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(pa, "PostAlpha.txt");
     FILE * fa = fopen(pa, "wb");
     if(fa == NULL){
-        printf("Cannot open file for PostAlpha.\n");
+        Rprintf("Cannot open file for PostAlpha.\n");
     }
     for(i=0; i<K; i++){
         for(l=0; l<L; l++){
@@ -343,7 +343,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(pas, "PostAlphaStar.txt");
     FILE * fas = fopen(pas, "wb");
     if(fas == NULL){
-        printf("Cannot open file for PostAlphaStar.\n");
+        Rprintf("Cannot open file for PostAlphaStar.\n");
     }
     for(i=0; i<K; i++){
         for(l=0; l<L; l++){
@@ -364,7 +364,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(pmu, "PostMu.txt");
     FILE * fmu = fopen(pmu, "wb");
     if(fmu == NULL){
-        printf("Cannot open file for PostMuStar.\n");
+        Rprintf("Cannot open file for PostMuStar.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -383,7 +383,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(pgamma, "PostGamma.txt");
     FILE * fgamma = fopen(pgamma, "wb");
     if(fgamma == NULL){
-        printf("Cannot open file for PostGamma.\n");
+        Rprintf("Cannot open file for PostGamma.\n");
     }
     for(p=0; p<P*L; p++){
         fprintf(fgamma, "%f ", PostSamp.gamma[p]);
@@ -398,7 +398,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(pw, "PostWeight.txt");
     FILE * fw = fopen(pw, "wb");
     if(fw == NULL){
-        printf("Cannot open file for PostWeight.\n");
+        Rprintf("Cannot open file for PostWeight.\n");
     }
     for(p=0; p<L; p++){
         fprintf(fw, "%f ", PostSamp.w[p]);
@@ -413,7 +413,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(pe, "PostErr2inv_e.txt");
     FILE * fe = fopen(pe, "wb");
     if(fe == NULL){
-        printf("Cannot open file for PostErr2inv_e.\n");
+        Rprintf("Cannot open file for PostErr2inv_e.\n");
     }
     fprintf(fe, "%f\n", PostSamp.err2inv_e[0]);
     fprintf(fe, "\n");
@@ -426,7 +426,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(pz, "PostErr2inv_zeta.txt");
     FILE * fz = fopen(pz, "wb");
     if(fz == NULL){
-        printf("Cannot open file for PostErr2inv_zeta.\n");
+        Rprintf("Cannot open file for PostErr2inv_zeta.\n");
     }
     fprintf(fz, "%f\n", PostSamp.err2inv_zeta[0]);
     fprintf(fz, "\n");
@@ -439,7 +439,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
     strcat(peps, "PostErr2inv_eps.txt");
     FILE * feps = fopen(peps, "wb");
     if(feps == NULL){
-        printf("Cannot open file for PostErr2inv_eps.\n");
+        Rprintf("Cannot open file for PostErr2inv_eps.\n");
     }
     fprintf(feps, "%f ", PostSamp.err2inv_eps[0]);
     fprintf(feps, "\n");
@@ -456,99 +456,99 @@ void print_t0(struct Sampling PostSamp, const struct Inputdata data, const struc
     parcel_len = data.parcel_len[0];
     
     // Print
-    printf("\nInitial Gamma\n");
+    Rprintf("\nInitial Gamma\n");
     for(p=0; p<3; p++){
         for(l=0; l<L; l++){
-            printf("%.6f ", PostSamp.gamma[p*L+l]);
+            Rprintf("%.6f ", PostSamp.gamma[p*L+l]);
         }
-        printf("\n");
+        Rprintf("\n");
     }
     
-    printf("\nInitial Alpha\n");
+    Rprintf("\nInitial Alpha\n");
     for(k=0; k<K; k++){
         for(m=0; m<5; m++){
-            printf("%.6f ", PostSamp.alpha[0][k*Ml+m]);
+            Rprintf("%.6f ", PostSamp.alpha[0][k*Ml+m]);
         }
-        printf("\n");
+        Rprintf("\n");
     }
     
-    printf("\nInitial Beta\n");
+    Rprintf("\nInitial Beta\n");
     for(k=0; k<5; k++){
         for(m=0; m<K; m++){
-            printf("%.6f ", PostSamp.beta[0][k*K+m]);
+            Rprintf("%.6f ", PostSamp.beta[0][k*K+m]);
         }
-        printf("\n");
+        Rprintf("\n");
     }
     
-    printf("\nInitial BetaStar\n");
+    Rprintf("\nInitial BetaStar\n");
     for(k=0; k<5; k++){
         for(m=0; m<K; m++){
-            printf("%.6f ", PostSamp.betastar[0][k*K+m]);
+            Rprintf("%.6f ", PostSamp.betastar[0][k*K+m]);
         }
-        printf("\n");
+        Rprintf("\n");
     }
     
     
-    printf("\nInitial SumX\n");
+    Rprintf("\nInitial SumX\n");
     for(k=0; k<5; k++){
         for(m=0; m<5; m++){
-            printf("%.6f ", PostSamp.sumX[0][k*parcel_len+m]);
+            Rprintf("%.6f ", PostSamp.sumX[0][k*parcel_len+m]);
         }
-        printf("\n");
+        Rprintf("\n");
     }
     
-    printf("\nInitial X\n");
+    Rprintf("\nInitial X\n");
     for(k=0; k<5; k++){
         for(m=0; m<5; m++){
-            printf("%.6f ", data.Xl[0][k*parcel_len*P+m]);
+            Rprintf("%.6f ", data.Xl[0][k*parcel_len*P+m]);
         }
-        printf("\n");
+        Rprintf("\n");
     }
     
-    printf("\nInitial Latent\n");
+    Rprintf("\nInitial Latent\n");
     for(k=0; k<5; k++){
         for(m=0; m<K; m++){
-            printf("%.6f ", PostSamp.latentstar[0][k*K+m]);
+            Rprintf("%.6f ", PostSamp.latentstar[0][k*K+m]);
         }
-        printf("\n");
+        Rprintf("\n");
     }
 
-    printf("\nInitial Mustar\n");
+    Rprintf("\nInitial Mustar\n");
     for(k=0; k<5; k++){
         for(m=0; m<K; m++){
-            printf("%.6f ", PostSamp.mustar[0][k*K+m]);
+            Rprintf("%.6f ", PostSamp.mustar[0][k*K+m]);
         }
-        printf("\n");
+        Rprintf("\n");
     }
     
     
-    printf("\nInitial Load\n");
+    Rprintf("\nInitial Load\n");
     for(k=0; k<5; k++){
         for(m=0; m<K; m++){
-            printf("%.6f ", PostSamp.load[0][k*K+m]);
+            Rprintf("%.6f ", PostSamp.load[0][k*K+m]);
         }
-        printf("\n");
+        Rprintf("\n");
     }
     
-    printf("\nInitial Theta\n");
+    Rprintf("\nInitial Theta\n");
     for(k=0; k<5; k++){
         for(m=0; m<5; m++){
-            printf("%.6f ", PostSamp.theta[0][k*Ml+m]);
+            Rprintf("%.6f ", PostSamp.theta[0][k*Ml+m]);
         }
-        printf("\n");
+        Rprintf("\n");
     }
     
-    printf("\nInitial Phi\n");
+    Rprintf("\nInitial Phi\n");
     for(k=0; k<K; k++){
         for(l=0; l<L; l++){
-            printf("%.6f ", PostSamp.Phi2Inv[k*L+l]);
+            Rprintf("%.6f ", PostSamp.Phi2Inv[k*L+l]);
         }
-        printf("\n");
+        Rprintf("\n");
     }
     
     // Initial sigma
-    printf("\nInitial sigma^2\n");
-    printf("e=%.6f, zeta=%.6f, eps=%.6f\n",
+    Rprintf("\nInitial sigma^2\n");
+    Rprintf("e=%.6f, zeta=%.6f, eps=%.6f\n",
            PostSamp.err2inv_e[0],PostSamp.err2inv_zeta[0], PostSamp.err2inv_eps[0]);
 
 }

@@ -147,13 +147,13 @@ SEXP csblf(SEXP outputpath){
             Rprintf("**** t=%d *****\n", t);
         }
         // Post sampling of Zinter
-        //Rprintf("\n0");
+        Rprintf("\n1");
         Zinter_samp(nobs, L, K, PostSamp, data, BF, r, singular);
-        //Rprintf("\n01");
+        Rprintf("\n2");
         err2inv_u_samp(L, PostSamp, data, r);
-        //Rprintf("\n02");
+        Rprintf("\n3");
         err2inv_e_samp(nobs, L, PostSamp, data, BF, r);
-        //Rprintf("\n1");
+        Rprintf("\n4");
         // Post sampling of theta
         theta_samp(nobs, L, K, PostSamp, data, BF, r, singular);
         //Rprintf("\n2");

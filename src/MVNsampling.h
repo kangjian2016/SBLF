@@ -39,7 +39,7 @@ void MVNsamp(gsl_matrix * theta, const int n,
     
     int status = gsl_linalg_cholesky_decomp(work);
     if(status){
-        printf("Failed in Cholesky Decomposition\n");
+        Rprintf("Failed in Cholesky Decomposition\n");
     }else{
 
         // Solving for y: covInv * y = meanM

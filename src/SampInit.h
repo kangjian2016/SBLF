@@ -43,7 +43,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     strcat(stheta, "simtheta.txt");
     FILE *rtheta = fopen(stheta, "r");
     if(rtheta == NULL){
-        printf("Cannot open file for theta.txt\n");
+        Rprintf("Cannot open file for theta.txt\n");
     }
     for(i=0; i<nobs; i++){
         for(j=0; j<Ml; j++){
@@ -83,7 +83,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     strcat(sload, "simloading.txt");
     FILE *rload = fopen(sload, "r");
     if(rload == NULL){
-        printf("Cannot open file for load.txt\n");
+        Rprintf("Cannot open file for load.txt\n");
     }
     for(i=0; i<Ml; i++){
         for(j=0; j<K; j++){
@@ -117,7 +117,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     strcat(sloads, "simloadingStar.txt");
     FILE *rloads = fopen(sloads, "r");
     if(rload == NULL){
-        printf("Cannot open file for loadStar.txt\n");
+        Rprintf("Cannot open file for loadStar.txt\n");
     }
     for(i=0; i<Ml; i++){
         for(j=0; j<K; j++){
@@ -145,7 +145,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     strcat(slatent, "simlatent.txt");
     FILE *rlatent = fopen(slatent, "r");
     if(rlatent == NULL){
-        printf("Cannot open file for latent.txt\n");
+        Rprintf("Cannot open file for latent.txt\n");
     }
     for(i=0; i<nobs; i++){
         for(j=0; j<K; j++){
@@ -172,7 +172,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     strcat(slatents, "simlatentStar.txt");
     FILE *rlatents = fopen(slatents, "r");
     if(rlatents == NULL){
-        printf("Cannot open file for latentS.txt\n");
+        Rprintf("Cannot open file for latentS.txt\n");
     }
     for(i=0; i<nobs; i++){
         for(j=0; j<K; j++){
@@ -199,7 +199,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     strcat(smu, "simmustar.txt");
     FILE *rmu = fopen(smu, "r");
     if(rmu == NULL){
-        printf("Cannot open file for mu.txt\n");
+        Rprintf("Cannot open file for mu.txt\n");
     }
     for(i=0; i<nobs; i++){
         for(j=0; j<K; j++){
@@ -226,7 +226,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     strcat(sa, "simalpha.txt");
     FILE *ra = fopen(sa, "r");
     if(ra == NULL){
-        printf("Cannot open file for alpha.txt\n");
+        Rprintf("Cannot open file for alpha.txt\n");
     }
     for(i=0; i<K; i++){
         for(j=0; j<Ml; j++){
@@ -254,7 +254,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     strcat(sas, "simalphaStar.txt");
     FILE *ras = fopen(sas, "r");
     if(ras == NULL){
-        printf("Cannot open file for alphas.txt\n");
+        Rprintf("Cannot open file for alphas.txt\n");
     }
     for(i=0; i<K; i++){
         for(j=0; j<Ml; j++){
@@ -276,7 +276,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     strcat(sb, "simbeta.txt");
     FILE *rb = fopen(sb, "r");
     if(rb == NULL){
-        printf("Cannot open file for beta.txt\n");
+        Rprintf("Cannot open file for beta.txt\n");
     }
     for(i=0; i<1024; i++){
         for(j=0; j<K; j++){
@@ -304,7 +304,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     strcat(sbs, "simbetaStar.txt");
     FILE *rbs = fopen(sbs, "r");
     if(rbs == NULL){
-        printf("Cannot open file for betas.txt\n");
+        Rprintf("Cannot open file for betas.txt\n");
     }
     for(i=0; i<1024; i++){
         for(j=0; j<K; j++){
@@ -429,7 +429,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     
     // Printout
     if(printInit == true){
-        printf("************ Initial Values of Model Parameters ************\n");
+        Rprintf("************ Initial Values of Model Parameters ************\n");
         print_t0(PostSamp, data, BF, P, K, L);
     }
     
@@ -579,7 +579,7 @@ void set_initial(const int L, const int nobs, const int nts, const int K, const 
     
     // Printout
     if(printInit == true){
-        printf("************ Initial Values of Model Parameters ************\n");
+        Rprintf("************ Initial Values of Model Parameters ************\n");
         print_t0(PostSamp, data, BF, P, K, L);
     }
     

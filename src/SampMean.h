@@ -171,7 +171,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
         strcat(outts, "PostMean_Out_test.txt");
         FILE * foutts = fopen(outts, "wb");
         if(foutts == NULL){
-            printf("Cannot open file for PostMean_Out_test.\n");
+            Rprintf("Cannot open file for PostMean_Out_test.\n");
         }
         for(i=0; i<nts; i++){
             for(l=0; l<L; l++){
@@ -192,7 +192,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
         strcat(outts2, "PostMean2_Out_test.txt");
         FILE * foutts2 = fopen(outts2, "wb");
         if(foutts2 == NULL){
-            printf("Cannot open file for PostMean2_Out_test.\n");
+            Rprintf("Cannot open file for PostMean2_Out_test.\n");
         }
         for(i=0; i<nts; i++){
             for(l=0; l<L; l++){
@@ -217,7 +217,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(outtr, "PostMean_Out_train.txt");
     FILE * fouttr = fopen(outtr, "wb");
     if(fouttr == NULL){
-        printf("Cannot open file for PostMean_Out_train.\n");
+        Rprintf("Cannot open file for PostMean_Out_train.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -238,7 +238,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(outtr2, "PostMean2_Out_train.txt");
     FILE * fouttr2 = fopen(outtr2, "wb");
     if(fouttr2 == NULL){
-        printf("Cannot open file for PostMean2_Out_train.\n");
+        Rprintf("Cannot open file for PostMean2_Out_train.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -261,7 +261,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
         strcat(ozinter, "PostMean_Zinter_test.txt");
         FILE * fzinter = fopen(ozinter, "wb");
         if(fzinter == NULL){
-            printf("Cannot open file for PostMean_Zinter_test.\n");
+            Rprintf("Cannot open file for PostMean_Zinter_test.\n");
         }
         for(l=0; l<L; l++){
             parcel_len = data.parcel_len[l];
@@ -282,7 +282,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(ozintertr, "PostMean_Zinter.txt");
     FILE * fzintertr = fopen(ozintertr, "wb");
     if(fzintertr == NULL){
-        printf("Cannot open file for PostMean_Zinter.\n");
+        Rprintf("Cannot open file for PostMean_Zinter.\n");
     }
     for(l=0; l<L; l++){
         parcel_len = data.parcel_len[l];
@@ -302,7 +302,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(mptheta, "PostMean_Theta.txt");
     FILE * mftheta = fopen(mptheta, "wb");
     if(mftheta == NULL){
-        printf("Cannot open file for PostMean_Theta.\n");
+        Rprintf("Cannot open file for PostMean_Theta.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -325,7 +325,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
         strcat(mpthetats, "PostMean_Theta_test.txt");
         FILE * mfthetats = fopen(mpthetats, "wb");
         if(mfthetats == NULL){
-            printf("Cannot open file for PostMean_Theta_test.\n");
+            Rprintf("Cannot open file for PostMean_Theta_test.\n");
         }
         for(i=0; i<nts; i++){
             for(l=0; l<L; l++){
@@ -348,7 +348,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(mpthetatr, "PostMean_Theta_train.txt");
     FILE * mfthetatr = fopen(mpthetatr, "wb");
     if(mfthetatr == NULL){
-        printf("Cannot open file for PostMean_Theta_train.\n");
+        Rprintf("Cannot open file for PostMean_Theta_train.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -369,7 +369,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(mpload, "PostMean_Loading.txt");
     FILE * mfload = fopen(mpload, "wb");
     if(mfload == NULL){
-        printf("Cannot open file for PostMean_Load.\n");
+        Rprintf("Cannot open file for PostMean_Load.\n");
     }
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
@@ -390,7 +390,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(mploads, "PostMean_LoadingStar.txt");
     FILE * mfloads = fopen(mploads, "wb");
     if(mfloads == NULL){
-        printf("Cannot open file for PostMean_LoadStar.\n");
+        Rprintf("Cannot open file for PostMean_LoadStar.\n");
     }
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
@@ -411,7 +411,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(mlatent, "PostMean_Latent.txt");
     FILE * mflatent = fopen(mlatent, "wb");
     if(mflatent == NULL){
-        printf("Cannot open file for PostMean_Latent.\n");
+        Rprintf("Cannot open file for PostMean_Latent.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -432,7 +432,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(mlatents, "PostMean_LatentStar.txt");
     FILE * mflatents = fopen(mlatents, "wb");
     if(mflatents == NULL){
-        printf("Cannot open file for PostMean_LatentStar.\n");
+        Rprintf("Cannot open file for PostMean_LatentStar.\n");
     }
     
     for(i=0; i<nobs; i++){
@@ -455,7 +455,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
         strcat(mlatentts, "PostMean_Latent_test.txt");
         FILE * mflatentts = fopen(mlatentts, "wb");
         if(mflatentts == NULL){
-            printf("Cannot open file for PostMean_Latent_test.\n");
+            Rprintf("Cannot open file for PostMean_Latent_test.\n");
         }
         for(i=0; i<nts; i++){
             for(l=0; l<L; l++){
@@ -478,7 +478,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(mlatenttr, "PostMean_Latent_train.txt");
     FILE * mflatenttr = fopen(mlatenttr, "wb");
     if(mflatenttr == NULL){
-        printf("Cannot open file for PostMean_Latent_train.\n");
+        Rprintf("Cannot open file for PostMean_Latent_train.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -500,7 +500,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(mphi, "PostMean_Phi.txt");
     FILE * mfphi = fopen(mphi, "wb");
     if(mfphi == NULL){
-        printf("Cannot open file for PostMean_Phi.\n");
+        Rprintf("Cannot open file for PostMean_Phi.\n");
     }
     for(j=0; j<K*L; j++){
         fprintf(mfphi, "%f ", PostSamp.mean_Phi2Inv[j]/niter);
@@ -515,7 +515,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(mbetal, "PostMean_Beta.txt");
     FILE * mfbetal = fopen(mbetal, "wb");
     if(mfbetal == NULL){
-        printf("Cannot open file for PostMean_Beta.\n");
+        Rprintf("Cannot open file for PostMean_Beta.\n");
     }
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
@@ -537,7 +537,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(mbetals, "PostMean_BetaStar.txt");
     FILE * mfbetals = fopen(mbetals, "wb");
     if(mfbetals == NULL){
-        printf("Cannot open file for PostMean_BetaStar.\n");
+        Rprintf("Cannot open file for PostMean_BetaStar.\n");
     }
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
@@ -561,7 +561,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(pa, "PostMean_Alpha.txt");
     FILE * fa = fopen(pa, "wb");
     if(fa == NULL){
-        printf("Cannot open file for PostMean_Alpha.\n");
+        Rprintf("Cannot open file for PostMean_Alpha.\n");
     }
     for(i=0; i<K; i++){
         for(l=0; l<L; l++){
@@ -581,7 +581,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(pas, "PostMean_AlphaStar.txt");
     FILE * fas = fopen(pas, "wb");
     if(fas == NULL){
-        printf("Cannot open file for PostMean_AlphaStar.\n");
+        Rprintf("Cannot open file for PostMean_AlphaStar.\n");
     }
     for(i=0; i<K; i++){
         for(l=0; l<L; l++){
@@ -601,7 +601,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(mgamma, "PostMean_Gamma.txt");
     FILE * mfgamma = fopen(mgamma, "wb");
     if(mfgamma == NULL){
-        printf("Cannot open file for PostMean_Gamma.\n");
+        Rprintf("Cannot open file for PostMean_Gamma.\n");
     }
     for(j=0; j<P; j++){
         for(l=0; l<L; l++){
@@ -618,7 +618,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(mw, "PostMean_Weight.txt");
     FILE * mfw = fopen(mw, "wb");
     if(mfw == NULL){
-        printf("Cannot open file for PostMean_Weight.\n");
+        Rprintf("Cannot open file for PostMean_Weight.\n");
     }
     for(l=0; l<L; l++){
         fprintf(mfw, "%f ", PostSamp.mean_w[l]/niter);
@@ -633,7 +633,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(pmu, "PostMean_MuStar.txt");
     FILE * fmu = fopen(pmu, "wb");
     if(fmu == NULL){
-        printf("Cannot open file for PostMean_MuStar.\n");
+        Rprintf("Cannot open file for PostMean_MuStar.\n");
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
@@ -655,7 +655,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(pe, "PostMean_Err2inv_e.txt");
     FILE * fe = fopen(pe, "wb");
     if(fe == NULL){
-        printf("Cannot open file for PostMean_Err2inv_e.\n");
+        Rprintf("Cannot open file for PostMean_Err2inv_e.\n");
     }
     fprintf(fe, "%f\n", PostSamp.err2inv_e_mean[0]/niter);
     fprintf(fe, "\n");
@@ -668,7 +668,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(pezeta, "PostMean_Err2inv_zeta.txt");
     FILE * fezeta = fopen(pezeta, "wb");
     if(fezeta == NULL){
-        printf("Cannot open file for PostMean-Err2inv_zeta.\n");
+        Rprintf("Cannot open file for PostMean-Err2inv_zeta.\n");
     }
     fprintf(fezeta, "%f\n", PostSamp.err2inv_zeta_mean[0]/niter);
     fprintf(fezeta, "\n");
@@ -681,7 +681,7 @@ void output_mean(const int L, const int K, const int nobs, const int nts, const 
     strcat(peps, "PostMean_Err2inv_eps.txt");
     FILE * feps = fopen(peps, "wb");
     if(feps == NULL){
-        printf("Cannot open file for PostMean-Err2inv_eps.\n");
+        Rprintf("Cannot open file for PostMean-Err2inv_eps.\n");
     }
     fprintf(feps, "%f\n", PostSamp.err2inv_eps_mean[0]/niter);
     fclose(feps);

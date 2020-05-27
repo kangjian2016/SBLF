@@ -39,7 +39,7 @@ void latent_samp(const int L, const int K, const int nobs, struct Sampling PostS
         // Cholesky Decomposition
         int status = gsl_linalg_cholesky_decomp(latent_prec);
         if(status){
-            printf("Failed Cholesky Decomposition for Latent\n");
+            Rprintf("Failed Cholesky Decomposition for Latent\n");
             goto stop;
         }
       

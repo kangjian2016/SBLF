@@ -35,7 +35,7 @@ void mu_samp(const int L, const int K, const int nobs,
         // Cholesky Decomposition
         int status = gsl_linalg_cholesky_decomp(mu_prec);
         if(status){
-            printf("Failed Cholesky Decomposition for Mu\n");
+            Rprintf("Failed Cholesky Decomposition for Mu\n");
             goto stop;
         }
         

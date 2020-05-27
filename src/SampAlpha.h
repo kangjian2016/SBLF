@@ -56,7 +56,7 @@ void alpha_samp(const int nobs, const int K, const int P, const int L,
             // Cholesky Decomposation
             int status = gsl_linalg_cholesky_decomp(alpha_prec);
             if(status){
-                printf("Failed Cholesky Decomposition for Alpha\n");
+                Rprintf("Failed Cholesky Decomposition for Alpha\n");
                 goto stop;
             }
             
