@@ -194,7 +194,7 @@ struct BasisFunc genBasis(int L, const char * basispath, struct Inputdata data, 
     
     ///// Output Basis kernel locations and vasis values
     char * outb = (char*)calloc(500, sizeof(char));
-    char sl[10];
+    char sl[20];
     strcat(outb, basispath);
     strcat(outb, "Basis_");
     

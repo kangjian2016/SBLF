@@ -659,7 +659,7 @@ void init_latent_rand(struct Sampling PostSamp, const struct BasisFunc BF, const
                 for(v=0; v<parcel_len; v++){
                     tempsum += (double)PostSamp.sumX[l] [i*parcel_len+v] * (double)PostSamp.beta[l][v*K+k];
                 }
-                err = gsl_ran_gaussian(r, sqrt(1.0/PostSamp.err2inv_eps[0]));
+                //err = gsl_ran_gaussian(r, sqrt(1.0/PostSamp.err2inv_eps[0]));
                 PostSamp.latent[l][i*K+k] = gsl_ran_gaussian(r, 2.0);//(float)tempsum + err;
                 PostSamp.latentstar[l][i*K+k] = PostSamp.latent[l][i*K+k] * sqrtf(PostSamp.Phi2Inv[k*L+l]) + PostSamp.mustar[l][i*K+k];
                 PostSamp.mean_latent[l][i*K+k] = 0.0f;
@@ -717,12 +717,13 @@ void init_load_rand(struct Sampling PostSamp, struct BasisFunc BF, const int L, 
                     tempsum += gsl_matrix_get(ete_inv, k, i) * kmmat[i*Ml+m];
                 }
                 PostSamp.load[l][m*K+k]=tempsum;
+                Rprintf(tempsum);
                 PostSamp.loadstar[l][m*K+k]=tempsum;
                 PostSamp.mean_loadstar[l][m*K+k] = 0.0f;
                 PostSamp.mean_load[l][m*K+k] = 0.0f;
             }
         }
-        
+        free(kmmat);
     }
     gsl_matrix_free(ete);
     gsl_matrix_free(ete_inv);

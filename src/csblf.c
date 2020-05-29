@@ -123,8 +123,8 @@ SEXP csblf(SEXP outputpath){
     K = strcmp(dataSource, "Simulation") == 0 ? 20 : 9;
     
     // Length of chain
-    int iter = 10000; // total iterations
-    int burnin = 5000; // iterations after burnin
+    int iter = 50; // total iterations
+    int burnin = 25; // iterations after burnin
     
     // Parameters
     struct Sampling PostSamp;
