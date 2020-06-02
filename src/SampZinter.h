@@ -8,7 +8,7 @@ void Zinter_samp(int nobs, int L, int K, struct Sampling PostSamp, struct Inputd
 
 //////////////////////////////////////////////////////////////////////////////////////////
 void Zinter_samp(int nobs, int L, int K, struct Sampling PostSamp, struct Inputdata data, const struct BasisFunc BF, gsl_rng *r, int * singular){
-
+    gsl_set_error_handler_off();
     int i, j, l, k, rr, Ml, parcel_len;
     double tmp, tempsum;
     
@@ -41,7 +41,7 @@ void Zinter_samp(int nobs, int L, int K, struct Sampling PostSamp, struct Inputd
                 tempsum += (double)data.Zl[l][k*parcel_len+i] - tmp;
             }
             tempsum *= var2;
-            PostSamp.Zinter[l][i] = gsl_ran_gaussian(r, sqrtf((float)var)) + tempsum ;
+            PostSamp.Zinter[l][i] = gsl_ran_gaussian(r, sqrtf((double)var)) + tempsum ;
         }
     }
 
@@ -72,6 +72,7 @@ void Zinter_samp(int nobs, int L, int K, struct Sampling PostSamp, struct Inputd
 
 
 void err2inv_u_samp(const int L, struct Sampling PostSamp, const struct Inputdata data, const gsl_rng *r){
+    gsl_set_error_handler_off();
     int l, v, parcel_len;
     double post_a, post_b;
     post_a = (double)PostSamp.err2inv_u_a + 0.5;

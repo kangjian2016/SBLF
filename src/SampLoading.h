@@ -6,7 +6,7 @@ void load_samp(int K, int L, int nobs,
                gsl_rng *r){
    
     int l, m, i, j, k, Ml;
-    
+    gsl_set_error_handler_off();
     /*printf("\n#########\nOld_LoadingStar\n");
     for(i=0; i<5; i++){
         for(j=0; j<K; j++){

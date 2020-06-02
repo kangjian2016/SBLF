@@ -56,7 +56,7 @@ int eval_neg(gsl_matrix * A, int n){
 /***************************************************/
 
 void rmvnorm(const gsl_rng *r, const int n, const gsl_vector *mean, const gsl_matrix *var, gsl_vector *result, float * flag){
-    
+    gsl_set_error_handler_off();
     int k, i;
     gsl_matrix *work = gsl_matrix_alloc(n,n);
     for(i=0; i<n; i++){
@@ -89,6 +89,7 @@ void rmvnorm(const gsl_rng *r, const int n, const gsl_vector *mean, const gsl_ma
 
 void rwishart(const gsl_rng *r, const unsigned int n, const unsigned int dof, const gsl_matrix *scale, gsl_matrix *result)
 {
+    gsl_set_error_handler_off();
     unsigned int k,l, i, j;
     gsl_matrix *work = gsl_matrix_calloc(n,n);
     

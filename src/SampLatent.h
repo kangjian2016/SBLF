@@ -5,7 +5,7 @@
 void latent_samp(const int L, const int K, const int nobs, struct Sampling PostSamp, const struct Inputdata data, const struct BasisFunc BF, gsl_rng *r){
 
     int l, i, j, m, k, q, rr, Ml;
-    
+   gsl_set_error_handler_off();
     /*printf("\n#########\nOld_LatentStar\n");
     for(i=0; i<3; i++){
         for(j=0; j<K; j++){

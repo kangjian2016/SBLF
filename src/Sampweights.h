@@ -1,5 +1,5 @@
 void weight_samp(struct Sampling PostSamp, const int P, const int L, gsl_rng *r){
-    
+    gsl_set_error_handler_off();
     int p, l;
     double gm;
     double pp = (double)P;

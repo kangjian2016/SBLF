@@ -4,7 +4,7 @@
 
 void beta_samp_approx(const int nobs, const int L, const int K,
                struct Sampling PostSamp, const struct Inputdata data, const struct BasisFunc BF, gsl_rng *r){
-    
+    gsl_set_error_handler_off();
     int i, j, l, k, Ml, parcel_len;
 
     /*printf("\n#########\nOld_BetaStar\n");
