@@ -1,7 +1,7 @@
 void mu_samp(const int L, const int K, const int nobs,
               struct Sampling PostSamp, const struct Inputdata data, const struct BasisFunc BF,
               gsl_rng *r){
-
+    gsl_set_error_handler_off();
     int l, i, j, k, q, rr, Ml;
     double err;
     

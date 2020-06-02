@@ -48,7 +48,7 @@
 //#include <Rmath.h>
 
 SEXP csblf(SEXP outputpath){
-    //Rprintf("started\n");
+    gsl_set_error_handler_off();
     //////////////////////////////////////////////////////////
     ///// GSL Random Number Generator Initialization /////
     //////////////////////////////////////////////////////////
@@ -58,7 +58,6 @@ SEXP csblf(SEXP outputpath){
     T = gsl_rng_default;
     r = gsl_rng_alloc(T);
     gsl_rng_set(r, 123);
-    
     //////////////////////////////////////////////////////////
     ///// Input Data /////
     //////////////////////////////////////////////////////////
@@ -67,35 +66,16 @@ SEXP csblf(SEXP outputpath){
     inpathx = (char *)calloc(500,sizeof(char));
     inpath = (char *)calloc(500,sizeof(char));
     outpath = (char *)calloc(500,sizeof(char));
-    
     char *outppath = CHAR(asChar(outputpath));
-    Rprintf(outppath);
     
-    //outputpath = (char *)calloc(500,sizeof(char));
     char dataSource[20] = "RealData"; // data from simulation or read data source
     int sim = strcmp(dataSource, "Simulation") == 0 ? 1 : 0;
-    
-    // simulated data pathway
-    if (strcmp(dataSource, "Simulation") == 0) {
-        //printf("Data from simulation study.\n");
-        strcat(inpathx, "/home/mk/Desktop/ImageOnImageRegression-original/ImageOnImageRegression/SimulationStudy/Data/");
-        strcat(inpath, "/home/mk/Desktop/ImageOnImageRegression-original/ImageOnImageRegression/SimulationStudy/Data/SpatialBayesLatent/");
-        strcat(outpath, "/home/mk/Desktop/ImageOnImageRegression-original/ImageOnImageRegression/SimulationStudy/Result/SpatialBayesLatent/");
-    } else if (strcmp(dataSource, "RealData") == 0 ) {
-        //printf("Data from a subset of the real data.\n");
-        // strcat(inpathx, "/home/mk/Desktop/ImageOnImageRegression-original/ImageOnImageRegression/RealDataAnalysis/Data/");
-        //strcat(outputpath, "/home/mk/Desktop/Rcsblf_test/");
-        strcat(inpathx, outppath);
-        strcat(inpathx, "Data/");
-        strcat(inpath, inpathx);
-        strcat(outpath, outppath);
-        strcat(outpath, "Result/");
-        // strcat(outpath, "/home/mk/Desktop/ImageOnImageRegression-original/ImageOnImageRegression/RealDataAnalysis/Result/");
-    } else {
-        //printf("Error: please specifiy the correct data source!\n");
-        //exit(0);
-    }
-    
+    strcat(inpathx, outppath);
+    strcat(inpathx, "Data/");
+    strcat(inpath, inpathx);
+    strcat(outpath, outppath);
+    strcat(outpath, "Result/");
+
     // Input data
     struct Inputdata data;
     data = input(inpathx, inpath, sim);
@@ -107,39 +87,30 @@ SEXP csblf(SEXP outputpath){
     ///// Basis Function /////
     // Define basis functions
     struct BasisFunc BF;
-    double bandwidth = 1.0/10.0;
+    float bandwidth = 1.0/10.0;
     int dd = 6.0;
     BF = genBasis(L, outpath, data, bandwidth, dd);
     int M = BF.M;
-    //printf("NO. of Basis functions: %d\n", M);
-    
-    
     //////////////////////////////////////////////////////////
     ///// MCMC /////
     //////////////////////////////////////////////////////////
-    
     // Number of latent factors
     int K ;
     K = strcmp(dataSource, "Simulation") == 0 ? 20 : 9;
-    
     // Length of chain
     int iter = 50; // total iterations
-    int burnin = 25; // iterations after burnin
-    
+    int burnin = 20; // iterations after burnin
     // Parameters
     struct Sampling PostSamp;
     PostSamp = setupSamp(M, nobs, nts, L, P, K, BF, data);
-
     // Initialization
     bool printInit = false;
     //set_initial2(L, nobs, nts, K, P, PostSamp, data, BF, r, outpath, printInit, inpath);
     set_initial(L, nobs, nts, K, P, PostSamp, data, BF, r, outpath, printInit);
-    
     clock_t start, end;
     start = clock();
     int *singular = (int *)calloc(2, sizeof(int));
     int t;
-
     // Start MCMC
     Rprintf("************ Start MCMC ************\n");
     for(t=1; t<=iter; t++){
@@ -147,71 +118,51 @@ SEXP csblf(SEXP outputpath){
             Rprintf("**** t=%d *****\n", t);
         }
         // Post sampling of Zinter
-        Rprintf("\n1");
         Zinter_samp(nobs, L, K, PostSamp, data, BF, r, singular);
-        Rprintf("\n2");
         err2inv_u_samp(L, PostSamp, data, r);
-        Rprintf("\n3");
         err2inv_e_samp(nobs, L, PostSamp, data, BF, r);
-        Rprintf("\n4");
         // Post sampling of theta
         theta_samp(nobs, L, K, PostSamp, data, BF, r, singular);
-        //Rprintf("\n2");
         // Post sampling of Phi2Inv
         phi2inv_samp(K, nobs, L, PostSamp, data, BF, r);
-        //Rprintf("\n3");
         // Post sampling of Loadings and its hyperparameters
         load_samp(K, L, nobs, PostSamp, BF, r);
-        //Rprintf("\n4");
         // Update latent variables
         latent_samp(L, K, nobs, PostSamp, data, BF, r);
-        //Rprintf("\n5");
         // Update mu
         mu_samp(L, K, nobs, PostSamp, data, BF, r);
-        
         // Update alpha
         alpha_samp(nobs, K, P, L, PostSamp, data, BF, r);
-        
         // Update beta
         beta_samp_approx(nobs, L, K, PostSamp, data, BF, r);
-
         // Update Gamma
         gamma_samp(P, nobs, K, L, PostSamp, data, BF, r);
-
         // Update Error
         err2inv_zeta_samp(nobs, L, K, PostSamp, data, BF, r);
         err2inv_eps_samp(nobs, L, K, PostSamp, data, BF, r);
-        
         ///////// Posterior estimations and predictions /////////
         if(t>(iter-burnin) && t%1==0){
-            
             // Training set
             est_training(nobs, P, L, K, PostSamp, data, BF);
-
             // test
             if(nts>0){
                 est_testing(nts, nobs, P, L, K, PostSamp, data, BF);
             }
-            
             // For posterior mean
             samp_mean(L, K, nobs, nts, P, PostSamp, data, BF);
         }
-
         // Write posterior samplings
         if(t%50==0){
             output_samp(outpath, t, burnin, nobs, nts, M, K, L, P, singular, PostSamp, data, BF);
         }
-        
         // Write posterior mean
         if(t==iter){
             output_mean(L, K, nobs, nts, P, outpath, PostSamp, data, BF, burnin);
         }
-        
     }
     end = clock();
-    double mcmc_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    float mcmc_time_used = ((float) (end - start)) / CLOCKS_PER_SEC;
     Rprintf("MCMC: %.2f secs\n", mcmc_time_used);
-
     ////////////////////////////////////////////////////////////
     ///// Release Memory /////
     ////////////////////////////////////////////////////////////
@@ -221,7 +172,6 @@ SEXP csblf(SEXP outputpath){
     free(inpath);
     free(inpathx);
     free(singular);
-    
     // Input Data
     free(data.sizes);
     free(data.parcel_len);
@@ -246,8 +196,6 @@ SEXP csblf(SEXP outputpath){
         free(data.Xl_test);
         free(PostSamp.xb_test);
     }
-    
-    
     // Basis Functions
     for(l=0; l<L; l++){
         free(BF.basis[l]);
@@ -256,8 +204,6 @@ SEXP csblf(SEXP outputpath){
     free(BF.basis);
     free(BF.kernel_loc);
     free(BF.Ml);
-
-    
     // Post Sampling
     for(l=0; l<L; l++){
         free(PostSamp.basis2[l]);
@@ -386,9 +332,7 @@ SEXP csblf(SEXP outputpath){
     free(PostSamp.theta_train_mean);
     free(PostSamp.outcome_train_mean);
     free(PostSamp.outcome_train_mean2);
-
-    Rprintf("MCMC complete.\n");
-    // return 0;
     
+    Rprintf("MCMC complete.\n");
     return R_NilValue;
 }

@@ -5,7 +5,7 @@
 void alpha_samp(const int nobs, const int K, const int P, const int L,
                struct Sampling PostSamp, const struct Inputdata data, const struct BasisFunc BF, gsl_rng *r){
     
-    
+    gsl_set_error_handler_off();
     int i, j, l, k, m, p, Ml;
     
     /*printf("\n#########\nOld_AlphaStar\n");
@@ -21,7 +21,7 @@ void alpha_samp(const int nobs, const int K, const int P, const int L,
 
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
-        float * tempmm = (float *)calloc(Ml*Ml, sizeof(float));
+        double * tempmm = (double *)calloc(Ml*Ml, sizeof(double));
         gsl_vector * alpha_mean = gsl_vector_alloc(Ml);
         gsl_matrix * alpha_samp = gsl_matrix_alloc(1, Ml);
         gsl_matrix * alpha_prec = gsl_matrix_alloc(Ml, Ml);

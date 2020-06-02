@@ -3,7 +3,7 @@
 //
 
 void gamma_samp(const int P, const int nobs, const int K, const int L, struct Sampling PostSamp, const struct Inputdata data, const struct BasisFunc BF, gsl_rng *r){
-    
+    gsl_set_error_handler_off();
     int i, k, p, l, m, Ml;
     double tempsum, tempsum1, temp, tau1, tau2, tau3, tau4, p0, p1;
     
@@ -17,7 +17,7 @@ void gamma_samp(const int P, const int nobs, const int K, const int L, struct Sa
     */
     
     // Tau_ikpl
-    float * tau = (float *)calloc(nobs*K*L*P, sizeof(float));
+    double * tau = (double *)calloc(nobs*K*L*P, sizeof(double));
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
             for(k=0; k<K; k++){

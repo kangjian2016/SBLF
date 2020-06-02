@@ -14,9 +14,9 @@ void est_testing(const int nts, const int nobs, const int P, const int L, const 
     
     int i, l, k, p, m, Ml, parcel_len;
     double tempsum, tempsum1, tempsum2;
-    float ** xba = (float **)malloc(L * sizeof(float *));
+    double ** xba = (double **)malloc(L * sizeof(double *));
     for(l=0; l<L; l++){
-        xba[l] = (float *)malloc(nts*K*P * sizeof(float));
+        xba[l] = (double *)malloc(nts*K*P * sizeof(double));
     }
     
     // X * beta = X * basis * alpha
@@ -103,9 +103,9 @@ void est_training(const int nobs, const int P, const int L, const int K,
     
     int i, l, m, p, k, Ml, parcel_len;
     double tempsum;
-    float ** xba = (float **)malloc(L * sizeof(float *));
+    double ** xba = (double **)malloc(L * sizeof(double *));
     for(l=0; l<L; l++){
-        xba[l] = (float *)malloc(nobs*K*P * sizeof(float));
+        xba[l] = (double *)malloc(nobs*K*P * sizeof(double));
     }
     
 

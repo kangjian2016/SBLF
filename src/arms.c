@@ -9,9 +9,9 @@
 /* *********************************************************************** */
 
 typedef struct point {    /* a point in the x,y plane */
-  double x,y;             /* x and y coordinates */
-  double ey;              /* exp(y-ymax+YCEIL) */
-  double cum;             /* integral up to x of rejection envelope */
+  float x,y;             /* x and y coordinates */
+  float ey;              /* exp(y-ymax+YCEIL) */
+  float cum;             /* integral up to x of rejection envelope */
   int f;                  /* is y an evaluated point of log-density */
   struct point *pl,*pr;   /* envelope points to left and right of x */
 } POINT;
@@ -22,16 +22,16 @@ typedef struct envelope {  /* attributes of the entire rejection envelope */
   int cpoint;              /* number of POINTs in current envelope */
   int npoint;              /* max number of POINTs allowed in envelope */
   int *neval;              /* number of function evaluations performed */
-  double ymax;             /* the maximum y-value in the current envelope */
+  float ymax;             /* the maximum y-value in the current envelope */
   POINT *p;                /* start of storage of envelope POINTs */
-  double *convex;          /* adjustment for convexity */
+  float *convex;          /* adjustment for convexity */
 } ENVELOPE;
 
 /* *********************************************************************** */
 
 typedef struct funbag { /* everything for evaluating log density          */
   void *mydata;      /* user-defined structure holding data for density */
-  double (*myfunc)(double x, void *mydata);
+  float (*myfunc)(float x, void *mydata);
                      /* user-defined function evaluating log density at x */
 } FUNBAG;
 
@@ -39,8 +39,8 @@ typedef struct funbag { /* everything for evaluating log density          */
 
 typedef struct metropolis { /* for metropolis step */
   int on;            /* whether metropolis is to be used */
-  double xprev;      /* previous Markov chain iterate */
-  double yprev;      /* current log density at xprev */
+  float xprev;      /* previous Markov chain iterate */
+  float yprev;      /* current log density at xprev */
 } METROPOLIS;
 
 /* *********************************************************************** */
@@ -55,23 +55,23 @@ typedef struct metropolis { /* for metropolis step */
 
 /* declarations for functions defined in this file */
 
-int arms_simple (int ninit, double *xl, double *xr, 
-                 double (*myfunc)(double x, void *mydata), void *mydata,
-                 int dometrop, double *xprev, double *xsamp);
+int arms_simple (int ninit, float *xl, float *xr, 
+                 float (*myfunc)(float x, void *mydata), void *mydata,
+                 int dometrop, float *xprev, float *xsamp);
 
-int arms (double *xinit, int ninit, double *xl, double *xr, 
-          double (*myfunc)(double x, void *mydata), void *mydata,
-          double *convex, int npoint, int dometrop, double *xprev, double *xsamp,
-          int nsamp, double *qcent, double *xcent, int ncent,
+int arms (float *xinit, int ninit, float *xl, float *xr, 
+          float (*myfunc)(float x, void *mydata), void *mydata,
+          float *convex, int npoint, int dometrop, float *xprev, float *xsamp,
+          int nsamp, float *qcent, float *xcent, int ncent,
           int *neval);
 
-int initial (double *xinit, int ninit, double xl, double xr, int npoint,
-	     FUNBAG *lpdf, ENVELOPE *env, double *convex, int *neval,
+int initial (float *xinit, int ninit, float xl, float xr, int npoint,
+	     FUNBAG *lpdf, ENVELOPE *env, float *convex, int *neval,
              METROPOLIS *metrop);
 
 void sample(ENVELOPE *env, POINT *p);
 
-void invert(double prob, ENVELOPE *env, POINT *p);
+void invert(float prob, ENVELOPE *env, POINT *p);
 
 int test(ENVELOPE *env, POINT *p, FUNBAG *lpdf, METROPOLIS *metrop);
 
@@ -81,23 +81,23 @@ void cumulate(ENVELOPE *env);
 
 int meet (POINT *q, ENVELOPE *env, METROPOLIS *metrop);
 
-double area(POINT *q);
+float area(POINT *q);
 
-double expshift(double y, double y0);
+float expshift(float y, float y0);
 
-double logshift(double y, double y0);
+float logshift(float y, float y0);
 
-double perfunc(FUNBAG *lpdf, ENVELOPE *env, double x);
+float perfunc(FUNBAG *lpdf, ENVELOPE *env, float x);
 
 void display(FILE *f, ENVELOPE *env);
 
-double u_random();
+float u_random();
 
 /* *********************************************************************** */
 
-int arms_simple (int ninit, double *xl, double *xr,
-                 double (*myfunc)(double x, void *mydata), void *mydata,
-                 int dometrop, double *xprev, double *xsamp)
+int arms_simple (int ninit, float *xl, float *xr,
+                 float (*myfunc)(float x, void *mydata), void *mydata,
+                 int dometrop, float *xprev, float *xsamp)
 
 /* adaptive rejection metropolis sampling - simplified argument list */
 /* ninit        : number of starting values to be used */
@@ -110,7 +110,7 @@ int arms_simple (int ninit, double *xl, double *xr,
 /* *xsamp       : to store sampled value */
 
 {
-  double xinit[ninit], convex=1.0, qcent, xcent;
+  float xinit[ninit], convex=1.0, qcent, xcent;
   int err, i, npoint=100, nsamp=1, ncent=0, neval; 
  
   /* set up starting values */
@@ -126,10 +126,10 @@ int arms_simple (int ninit, double *xl, double *xr,
 
 /* *********************************************************************** */
 
-int arms (double *xinit, int ninit, double *xl, double *xr, 
-	 double (*myfunc)(double x, void *mydata), void *mydata,
-         double *convex, int npoint, int dometrop, double *xprev, double *xsamp,
-         int nsamp, double *qcent, double *xcent,
+int arms (float *xinit, int ninit, float *xl, float *xr, 
+	 float (*myfunc)(float x, void *mydata), void *mydata,
+         float *convex, int npoint, int dometrop, float *xprev, float *xsamp,
+         int nsamp, float *qcent, float *xcent,
          int ncent, int *neval)
 
 /* to perform derivative-free adaptive rejection sampling with metropolis step */
@@ -235,8 +235,8 @@ int arms (double *xinit, int ninit, double *xl, double *xr,
 
 /* *********************************************************************** */
 
-int initial (double *xinit, int ninit, double xl, double xr, int npoint,
-	     FUNBAG *lpdf, ENVELOPE *env, double *convex, int *neval,
+int initial (float *xinit, int ninit, float xl, float xr, int npoint,
+	     FUNBAG *lpdf, ENVELOPE *env, float *convex, int *neval,
              METROPOLIS *metrop)
 
 /* to set up initial envelope */
@@ -353,7 +353,7 @@ void sample(ENVELOPE *env, POINT *p)
 /* *p      : a working POINT to hold the sampled value */
 
 {
-  double prob;
+  float prob;
 
   /* sample a uniform */
   prob = u_random();
@@ -365,7 +365,7 @@ void sample(ENVELOPE *env, POINT *p)
 
 /* *********************************************************************** */
 
-void invert(double prob, ENVELOPE *env, POINT *p)
+void invert(float prob, ENVELOPE *env, POINT *p)
 
 /* to obtain a point corresponding to a qiven cumulative probability */
 /* prob    : cumulative probability under envelope */
@@ -373,7 +373,7 @@ void invert(double prob, ENVELOPE *env, POINT *p)
 /* *p      : a working POINT to hold the sampled value */
 
 {
-  double u,xl,xr,yl,yr,eyl,eyr,prop,z;
+  float u,xl,xr,yl,yr,eyl,eyr,prop,z;
   POINT *q;
 
   /* find rightmost point in envelope */
@@ -442,7 +442,7 @@ int test(ENVELOPE *env, POINT *p, FUNBAG *lpdf, METROPOLIS *metrop)
 /* *metrop       : data required for metropolis step */
 
 {
-  double u,y,ysqueez,ynew,yold,znew,zold,w;
+  float u,y,ysqueez,ynew,yold,znew,zold,w;
   POINT *ql,*qr;
   
   /* for rejection test */
@@ -675,7 +675,7 @@ int meet (POINT *q, ENVELOPE *env, METROPOLIS *metrop)
 /* *metrop   : for metropolis step */
 
 {
-  double gl,gr,grl,dl,dr;
+  float gl,gr,grl,dl,dr;
   int il,ir,irl;
 
   if(q->f){
@@ -777,12 +777,12 @@ int meet (POINT *q, ENVELOPE *env, METROPOLIS *metrop)
 
 /* *********************************************************************** */
 
-double area(POINT *q)
+float area(POINT *q)
 
 /* To integrate piece of exponentiated envelope to left of POINT q */
 
 {
-  double a;
+  float a;
 
   if(q->pl == NULL){
     /* this is leftmost point in envelope */
@@ -802,7 +802,7 @@ double area(POINT *q)
 
 /* *********************************************************************** */
 
-double expshift(double y, double y0)
+float expshift(float y, float y0)
 
 /* to exponentiate shifted y without underflow */
 {
@@ -815,7 +815,7 @@ double expshift(double y, double y0)
 
 /* *********************************************************************** */
 
-double logshift(double y, double y0)
+float logshift(float y, float y0)
 
 /* inverse of function expshift */
 {
@@ -824,7 +824,7 @@ double logshift(double y, double y0)
 
 /* *********************************************************************** */
 
-double perfunc(FUNBAG *lpdf, ENVELOPE *env, double x)
+float perfunc(FUNBAG *lpdf, ENVELOPE *env, float x)
 
 /* to evaluate log density and increment count of evaluations */
 
@@ -833,7 +833,7 @@ double perfunc(FUNBAG *lpdf, ENVELOPE *env, double x)
 /* x       : point at which to evaluate log density */
 
 {
-  double y;
+  float y;
 
   /* evaluate density function */
   y = (lpdf->myfunc)(x,lpdf->mydata);
@@ -879,11 +879,11 @@ void display(FILE *f, ENVELOPE *env)
 
 /* *********************************************************************** */
 
-double u_random()
+float u_random()
 
 /* to return a standard uniform random number */
 {
-   return ((double)rand() + 0.5)/((double)RAND_MAX2 + 1.0);
+   return ((float)rand() + 0.5)/((float)RAND_MAX2 + 1.0);
 }
 
 /* *********************************************************************** */

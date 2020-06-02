@@ -4,7 +4,7 @@
 
 void theta_samp(int nobs, int L, int K, struct Sampling PostSamp, struct Inputdata data, const struct BasisFunc BF,
                 gsl_rng *r, int * singular){
-
+    gsl_set_error_handler_off();
     int i, j, l, k, m, rr, Ml, loc;
     double tmp;
     

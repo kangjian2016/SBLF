@@ -5,7 +5,7 @@ struct BasisFunc{
     int M; // total number of basis for all parcels
 };
 
-struct BasisFunc genBasis(int L, const char * basispath, struct Inputdata data, const double bandwidth, const int dd){
+struct BasisFunc genBasis(int L, const char * basispath, struct Inputdata data, const float bandwidth, const int dd){
     
     /*
      generate basis kernels
@@ -20,8 +20,8 @@ struct BasisFunc genBasis(int L, const char * basispath, struct Inputdata data, 
     int l, i, j, k, m, h;
     int loc, minx, maxx, miny, maxy, minz, maxz, nx, ny, nz;
     int parcel_len_l;
-    double dx, dy, dz, dist, tempdist;
-    double cut = sqrt((double)(dd*dd)*2.0);
+    float dx, dy, dz, dist, tempdist;
+    float cut = sqrt((float)(dd*dd)*2.0);
     
     
     // Generate basis kernel locations and values parcel by parcel
@@ -58,10 +58,10 @@ struct BasisFunc genBasis(int L, const char * basispath, struct Inputdata data, 
         }
 
         // number of basis kernel locations in each parcel
-        nx = (int)ceil(((double)(maxx-minx)/(double)dd)) + 1;
-        ny = (int)ceil(((double)(maxy-miny)/(double)dd)) + 1;
+        nx = (int)ceil(((float)(maxx-minx)/(float)dd)) + 1;
+        ny = (int)ceil(((float)(maxy-miny)/(float)dd)) + 1;
         if(dim_image == 3){
-            nz = (int)ceil(((double)(maxz-minz)/(double)dd)) + 1;
+            nz = (int)ceil(((float)(maxz-minz)/(float)dd)) + 1;
         }else{
             nz = 1;
         }

@@ -6,7 +6,7 @@
 
 void err2inv_eps_samp(const int nobs, const int L, const int K,
                        struct Sampling PostSamp, const struct Inputdata data, const struct BasisFunc BF, const gsl_rng *r){
-    
+    gsl_set_error_handler_off();
     int i, j, l, m;
     
     //printf("\n########\nOld_Err2inv_eps: ");

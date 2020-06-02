@@ -19,7 +19,7 @@ void set_initial(const int L, const int nobs, const int nts, const int K, const 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void set_initial2(const int L, const int nobs, const int nts, const int K, const int P, struct Sampling PostSamp, const struct Inputdata data, const struct BasisFunc BF, gsl_rng *r,  const char *outpath, const bool printInit, const char *inpath){
-    
+    gsl_set_error_handler_off();
     int i, j;
     int image_len = 1024;
     int Ml = BF.Ml[0];
@@ -28,13 +28,13 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     PostSamp.err2inv_e[0] = 0.1;//gsl_ran_flat(r, 1.0, 10.);
     PostSamp.err2inv_zeta[0] = 0.2;//gsl_ran_flat(r, 1.0, 10.);
     PostSamp.err2inv_eps[0] =  0.2;//gsl_ran_flat(r, 1.0, 10.);
-    PostSamp.err2inv_e_mean[0] = 0.0f;
-    PostSamp.err2inv_zeta_mean[0] = 0.0f;
-    PostSamp.err2inv_eps_mean[0] = 0.0f;
+    PostSamp.err2inv_e_mean[0] = 0.0;
+    PostSamp.err2inv_zeta_mean[0] = 0.0;
+    PostSamp.err2inv_eps_mean[0] = 0.0;
     int l;
     for(l=0; l<L; l++){
-        PostSamp.err2inv_u[l] = 0.0f;
-        PostSamp.err2inv_u_mean[l] = 0.0f;
+        PostSamp.err2inv_u[l] = 0.0;
+        PostSamp.err2inv_u_mean[l] = 0.0;
     }
     
     // Theta
@@ -60,7 +60,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     
     for(i=0; i<nobs; i++){
         for(j=0; j<Ml; j++){
-            PostSamp.mean_theta[0][i*Ml+j] = 0.0f;
+            PostSamp.mean_theta[0][i*Ml+j] = 0.0;
         }
     }
     
@@ -74,7 +74,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     // phi
     for(i=0; i<K*L; i++){
         PostSamp.Phi2Inv[i] = 1.0;
-        PostSamp.mean_Phi2Inv[i] = 0.0f;
+        PostSamp.mean_Phi2Inv[i] = 0.0;
     }
     
     // Loading
@@ -100,7 +100,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     
     for(i=0; i<Ml; i++){
         for(j=0; j<K; j++){
-            PostSamp.mean_load[0][i*K+j] = 0.0f;
+            PostSamp.mean_load[0][i*K+j] = 0.0;
         }
     }
     
@@ -134,7 +134,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     
     for(i=0; i<Ml; i++){
         for(j=0; j<K; j++){
-            PostSamp.mean_loadstar[0][i*K+j] = 0.0f;
+            PostSamp.mean_loadstar[0][i*K+j] = 0.0;
         }
     }
     
@@ -162,7 +162,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     
     for(i=0; i<nobs; i++){
         for(j=0; j<K; j++){
-            PostSamp.mean_latent[0][i*K+j] = 0.0f;
+            PostSamp.mean_latent[0][i*K+j] = 0.0;
         }
     }
 
@@ -189,7 +189,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     
     for(i=0; i<nobs; i++){
         for(j=0; j<K; j++){
-            PostSamp.mean_latentstar[0][i*K+j] = 0.0f;
+            PostSamp.mean_latentstar[0][i*K+j] = 0.0;
         }
     }
     
@@ -216,7 +216,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     
     for(i=0; i<nobs; i++){
         for(j=0; j<K; j++){
-            PostSamp.mean_mu[0][i*K+j] = 0.0f;
+            PostSamp.mean_mu[0][i*K+j] = 0.0;
         }
     }
     
@@ -243,8 +243,8 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     
     for(i=0; i<K; i++){
         for(j=0; j<Ml; j++){
-            PostSamp.mean_alpha[0][i*Ml+j] = 0.0f;
-            PostSamp.mean_alphastar[0][i*Ml+j] = 0.0f;
+            PostSamp.mean_alpha[0][i*Ml+j] = 0.0;
+            PostSamp.mean_alphastar[0][i*Ml+j] = 0.0;
         }
     }
     
@@ -293,8 +293,8 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
 
     for(i=0; i<image_len; i++){
         for(j=0; j<K; j++){
-            PostSamp.mean_beta[0][i*K+j] = 0.0f;
-            PostSamp.mean_betastar[0][i*K+j] = 0.0f;
+            PostSamp.mean_beta[0][i*K+j] = 0.0;
+            PostSamp.mean_betastar[0][i*K+j] = 0.0;
         }
     }
     
@@ -331,7 +331,7 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
 
     // w
     PostSamp.w[0]=0.5;
-    PostSamp.mean_w[0] = 0.0f;
+    PostSamp.mean_w[0] = 0.0;
     
     // summarized_x
     init_sumx(PostSamp, data, BF, nobs, L, P);
@@ -406,8 +406,8 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
             Ml = BF.Ml[l];
             parcel_len = data.parcel_len[l];
             for(p=0; p<parcel_len; p++){
-                PostSamp.outcome_train_mean[l][i*parcel_len + p] = 0.0f;
-                PostSamp.outcome_train_mean2[l][i*parcel_len + p] = 0.0f;
+                PostSamp.outcome_train_mean[l][i*parcel_len + p] = 0.0;
+                PostSamp.outcome_train_mean2[l][i*parcel_len + p] = 0.0;
             }
         }
     }
@@ -415,14 +415,14 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
         Ml = BF.Ml[l];
         for(i=0; i<nobs; i++){
             for(m=0; m<Ml; m++){
-                PostSamp.theta_train_mean[l][i*Ml+m] = 0.0f;
+                PostSamp.theta_train_mean[l][i*Ml+m] = 0.0;
             }
         }
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
             for(k=0; k<K; k++){
-                PostSamp.latent_train_mean[l][i*K+k] = 0.0f;
+                PostSamp.latent_train_mean[l][i*K+k] = 0.0;
             }
         }
     }
@@ -442,18 +442,18 @@ void set_initial2(const int L, const int nobs, const int nts, const int K, const
     
 void set_initial(const int L, const int nobs, const int nts, const int K, const int P, struct Sampling PostSamp, const struct Inputdata data, const struct BasisFunc BF, gsl_rng *r,  const char *outpath, const bool printInit){
     
-    
+    gsl_set_error_handler_off();
     // Errors
-    PostSamp.err2inv_e[0] = gsl_ran_flat(r, 1.0, 10.);
-    PostSamp.err2inv_zeta[0] = gsl_ran_flat(r, 1.0, 10.);
-    PostSamp.err2inv_eps[0] =  gsl_ran_flat(r, 1.0, 10.);
-    PostSamp.err2inv_e_mean[0] = 0.0f;
-    PostSamp.err2inv_zeta_mean[0] = 0.0f;
-    PostSamp.err2inv_eps_mean[0] = 0.0f;
+    PostSamp.err2inv_e[0] = gsl_ran_flat(r, 1.0, 10.0);
+    PostSamp.err2inv_zeta[0] = gsl_ran_flat(r, 1.0, 10.0);
+    PostSamp.err2inv_eps[0] =  gsl_ran_flat(r, 1.0, 10.0);
+    PostSamp.err2inv_e_mean[0] = 0.0;
+    PostSamp.err2inv_zeta_mean[0] = 0.0;
+    PostSamp.err2inv_eps_mean[0] = 0.0;
     int l;
     for(l=0; l<L; l++){
-        PostSamp.err2inv_u[l] = gsl_ran_flat(r, 1.0, 10.);
-        PostSamp.err2inv_u_mean[l] = 0.0f;
+        PostSamp.err2inv_u[l] = gsl_ran_flat(r, 1.0, 10.0);
+        PostSamp.err2inv_u_mean[l] = 0.0;
     }
     
     // Theta
@@ -556,8 +556,8 @@ void set_initial(const int L, const int nobs, const int nts, const int K, const 
             Ml = BF.Ml[l];
             parcel_len = data.parcel_len[l];
             for(p=0; p<parcel_len; p++){
-                PostSamp.outcome_train_mean[l][i*parcel_len + p] = 0.0f;
-                PostSamp.outcome_train_mean2[l][i*parcel_len + p] = 0.0f;
+                PostSamp.outcome_train_mean[l][i*parcel_len + p] = 0.0;
+                PostSamp.outcome_train_mean2[l][i*parcel_len + p] = 0.0;
             }
         }
     }
@@ -565,14 +565,14 @@ void set_initial(const int L, const int nobs, const int nts, const int K, const 
         Ml = BF.Ml[l];
         for(i=0; i<nobs; i++){
             for(m=0; m<Ml; m++){
-                PostSamp.theta_train_mean[l][i*Ml+m] = 0.0f;
+                PostSamp.theta_train_mean[l][i*Ml+m] = 0.0;
             }
         }
     }
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
             for(k=0; k<K; k++){
-                PostSamp.latent_train_mean[l][i*K+k] = 0.0f;
+                PostSamp.latent_train_mean[l][i*K+k] = 0.0;
             }
         }
     }    
@@ -592,7 +592,7 @@ void set_initial(const int L, const int nobs, const int nts, const int K, const 
 void init_zInter(const int nobs, const int L, struct Sampling PostSamp,
                  const struct Inputdata data, const struct BasisFunc BF){
     int i, j, l;
-    
+    gsl_set_error_handler_off();
     for (l=0; l<L; l++) {
         int parcel_len = data.parcel_len[l];
         for(j=0; j<parcel_len; j++) {
@@ -600,7 +600,7 @@ void init_zInter(const int nobs, const int L, struct Sampling PostSamp,
             for(i=0; i<nobs; i++){
                 tempsum += (double)data.Zl[l][i*parcel_len+j];
             }
-            PostSamp.Zinter[l][j] = (float) (tempsum / (double)nobs);
+            PostSamp.Zinter[l][j] = (double) (tempsum / (double)nobs);
         }
 
     }
@@ -608,7 +608,7 @@ void init_zInter(const int nobs, const int L, struct Sampling PostSamp,
 
 
 void init_theta_rand(const int nobs, const int L, struct Sampling PostSamp, const struct Inputdata data, const struct BasisFunc BF){
-    
+    gsl_set_error_handler_off();
     int i, j, k, l, Ml;
     double tempsum;
     
@@ -635,7 +635,7 @@ void init_theta_rand(const int nobs, const int L, struct Sampling PostSamp, cons
                     tempsum += gsl_matrix_get(btb_inv, i, j) * (double)PostSamp.zb[l][k*Ml+j];
                 }
                 PostSamp.theta[l][k*Ml+i] = tempsum;
-                PostSamp.mean_theta[l][k*Ml+i] = 0.0f;
+                PostSamp.mean_theta[l][k*Ml+i] = 0.0;
             }
         }
         gsl_matrix_free(btb);
@@ -647,7 +647,7 @@ void init_theta_rand(const int nobs, const int L, struct Sampling PostSamp, cons
 void init_latent_rand(struct Sampling PostSamp, const struct BasisFunc BF, const struct Inputdata data,
                       const int K, const int L, const int nobs, gsl_rng*r){
     int l, i, k, v, Ml, parcel_len;
-    
+    gsl_set_error_handler_off();
     // Initial Latent values
     double err, tempsum;
     for(l=0; l<L; l++){
@@ -660,10 +660,10 @@ void init_latent_rand(struct Sampling PostSamp, const struct BasisFunc BF, const
                     tempsum += (double)PostSamp.sumX[l] [i*parcel_len+v] * (double)PostSamp.beta[l][v*K+k];
                 }
                 //err = gsl_ran_gaussian(r, sqrt(1.0/PostSamp.err2inv_eps[0]));
-                PostSamp.latent[l][i*K+k] = gsl_ran_gaussian(r, 2.0);//(float)tempsum + err;
+                PostSamp.latent[l][i*K+k] = gsl_ran_gaussian(r, 2.0);//(double)tempsum + err;
                 PostSamp.latentstar[l][i*K+k] = PostSamp.latent[l][i*K+k] * sqrtf(PostSamp.Phi2Inv[k*L+l]) + PostSamp.mustar[l][i*K+k];
-                PostSamp.mean_latent[l][i*K+k] = 0.0f;
-                PostSamp.mean_latentstar[l][i*K+k] = 0.0f;
+                PostSamp.mean_latent[l][i*K+k] = 0.0;
+                PostSamp.mean_latentstar[l][i*K+k] = 0.0;
             }
         }
         
@@ -682,7 +682,7 @@ void init_latent_rand(struct Sampling PostSamp, const struct BasisFunc BF, const
 
 
 void init_load_rand(struct Sampling PostSamp, struct BasisFunc BF, const int L, const int K, const int nobs){
-    
+    gsl_set_error_handler_off();
     gsl_matrix * ete = gsl_matrix_alloc(K, K);
     gsl_matrix * ete_inv = gsl_matrix_alloc(K, K);
     
@@ -691,7 +691,7 @@ void init_load_rand(struct Sampling PostSamp, struct BasisFunc BF, const int L, 
 
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
-        float * kmmat = (float *)calloc(K*Ml, sizeof(float));
+        double * kmmat = (double *)calloc(K*Ml, sizeof(double));
         for(k=0; k<K; k++){
             for(j=0; j<K; j++){
                 gsl_matrix_set(ete, k, j, PostSamp.latent2[l][k*K+j]);
@@ -717,10 +717,9 @@ void init_load_rand(struct Sampling PostSamp, struct BasisFunc BF, const int L, 
                     tempsum += gsl_matrix_get(ete_inv, k, i) * kmmat[i*Ml+m];
                 }
                 PostSamp.load[l][m*K+k]=tempsum;
-                Rprintf(tempsum);
                 PostSamp.loadstar[l][m*K+k]=tempsum;
-                PostSamp.mean_loadstar[l][m*K+k] = 0.0f;
-                PostSamp.mean_load[l][m*K+k] = 0.0f;
+                PostSamp.mean_loadstar[l][m*K+k] = 0.0;
+                PostSamp.mean_load[l][m*K+k] = 0.0;
             }
         }
         free(kmmat);
@@ -736,16 +735,17 @@ void init_load_rand(struct Sampling PostSamp, struct BasisFunc BF, const int L, 
 
 void init_phi_rand(struct Sampling PostSamp, const int K,const int L, gsl_rng*r){
     int i;
+    gsl_set_error_handler_off();
     for(i=0; i<K*L; i++){
         PostSamp.Phi2Inv[i] = gsl_ran_flat(r, 0.5, 2.0);
-        PostSamp.mean_Phi2Inv[i] = 0.0f;
+        PostSamp.mean_Phi2Inv[i] = 0.0;
     }
 }
 
 void init_alpha_rand(struct Sampling PostSamp, const struct Inputdata data, const struct BasisFunc BF,
                      const int K, const int L, gsl_rng *r){
-    
-    float s;
+    gsl_set_error_handler_off();
+    double s;
     // Initial alpha values
     
     int k, l, m, Ml;
@@ -763,8 +763,8 @@ void init_alpha_rand(struct Sampling PostSamp, const struct Inputdata data, cons
             for(m=0; m<Ml; m++){
                 PostSamp.alpha[l][k*Ml+m] = gsl_ran_gaussian(r, 1.0/sqrt(PostSamp.err2inv_alpha));
                 PostSamp.alphastar[l][k*Ml+m] = PostSamp.alpha[l][k*Ml+m] * sqrt(PostSamp.Phi2Inv[k*L+l]) * s;
-                PostSamp.mean_alpha[l][k*Ml+m] = 0.0f;
-                PostSamp.mean_alphastar[l][k*Ml+m] = 0.0f;
+                PostSamp.mean_alpha[l][k*Ml+m] = 0.0;
+                PostSamp.mean_alphastar[l][k*Ml+m] = 0.0;
             }
         }
     }
@@ -775,7 +775,7 @@ void init_alpha_rand(struct Sampling PostSamp, const struct Inputdata data, cons
 void init_beta_rand(struct Sampling PostSamp, const struct BasisFunc BF, const struct Inputdata data,
                     const int K, const int L){
     int k, l, i, v, Ml, parcel_len;
-    float s;
+    double s;
     // Initial beta values
     double tempsum;
     for(k=0; k<K; k++){
@@ -798,8 +798,8 @@ void init_beta_rand(struct Sampling PostSamp, const struct BasisFunc BF, const s
                 }
                 PostSamp.beta[l][v*K+k] = tempsum;
                 PostSamp.betastar[l][v*K+k] = PostSamp.beta[l][v*K+k] * PostSamp.Phi2Inv[k*L+l] * s;
-                PostSamp.mean_beta[l][v*K+k] = 0.0f;
-                PostSamp.mean_betastar[l][v*K+k] = 0.0f;
+                PostSamp.mean_beta[l][v*K+k] = 0.0;
+                PostSamp.mean_betastar[l][v*K+k] = 0.0;
             }
         }
     }
@@ -810,17 +810,18 @@ void init_w_rand(struct Sampling PostSamp, const int L){
     int l;
     for(l=0; l<L; l++){
         PostSamp.w[l]=0.5;
-        PostSamp.mean_w[l] = 0.0f;
+        PostSamp.mean_w[l] = 0.0;
     }
 }
 
 
 void init_gamma_rand(struct Sampling PostSamp, int P,  int L, gsl_rng *r){
     int p;
+    gsl_set_error_handler_off();
     for(p=0; p<P*L; p++){
         PostSamp.gamma[p]= gsl_ran_bernoulli(r, .5);
-        PostSamp.mean_gamma[p] = 0.0f;
-        PostSamp.mean_gamma_update[p] = 0.0f;
+        PostSamp.mean_gamma[p] = 0.0;
+        PostSamp.mean_gamma_update[p] = 0.0;
     }
 }
 
@@ -848,12 +849,12 @@ void init_sumx(struct Sampling PostSamp, const struct Inputdata data, const stru
 
 void init_mu_rand(struct Sampling PostSamp, const int L, const int nobs, const int K, gsl_rng*r){
     int i, k, l;
-    
+    gsl_set_error_handler_off();
     for(l=0; l<L; l++){
         for(i=0; i<nobs; i++){
             for(k=0; k<K; k++){
                 PostSamp.mustar[l][i*K+k] = gsl_ran_gaussian(r, 1);
-                PostSamp.mean_mu[l][i*K+k] = 0.0f;
+                PostSamp.mean_mu[l][i*K+k] = 0.0;
             }
         }
     }

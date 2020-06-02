@@ -3,6 +3,7 @@
 void cholesky_forward(const gsl_matrix * cholesky,
                       const gsl_vector * b,
                       gsl_vector * x, const int p){
+    gsl_set_error_handler_off();
     int i, j;
     double tmpb, tmpa, tmpsum;
     gsl_vector_set(x, 0, gsl_vector_get(b, 0)/gsl_matrix_get(cholesky, 0, 0));
@@ -26,6 +27,7 @@ void MVNsamp(gsl_matrix * theta, const int n,
              const gsl_vector * meanM,
              const gsl_matrix * covInv, const int p,
              const gsl_rng *r){
+    gsl_set_error_handler_off();
     int i, j;
     
     // working matrix
@@ -76,6 +78,7 @@ void MVNsamp2(gsl_matrix * theta, const int n,
               const gsl_vector * meanM,
               const gsl_matrix * cholesky, const int p,
               const gsl_rng *r){
+    gsl_set_error_handler_off();
     int i, j;
     
     // Cholesky Decomposition

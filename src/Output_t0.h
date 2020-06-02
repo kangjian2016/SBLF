@@ -2,7 +2,7 @@ void out_t0(struct Sampling PostSamp, const struct Inputdata data, const struct 
             const int L, const int nobs, const int nts,
             const int K, const int P,
             gsl_rng *r, const char *outpath){
-    
+    gsl_set_error_handler_off();
     //////////////////////////////////////////////////////////
     //////////////////////// Output //////////////////////////
     //////////////////////////////////////////////////////////
