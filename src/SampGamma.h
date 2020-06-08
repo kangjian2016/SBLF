@@ -17,7 +17,7 @@ void gamma_samp(const int P, const int nobs, const int K, const int L, struct Sa
     */
     
     // Tau_ikpl
-    double * tau = (double *)calloc(nobs*K*L*P, sizeof(double));
+    float * tau = (float *)calloc(nobs*K*L*P, sizeof(float));
     for(i=0; i<nobs; i++){
         for(l=0; l<L; l++){
             for(k=0; k<K; k++){

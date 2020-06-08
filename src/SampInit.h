@@ -600,7 +600,7 @@ void init_zInter(const int nobs, const int L, struct Sampling PostSamp,
             for(i=0; i<nobs; i++){
                 tempsum += (double)data.Zl[l][i*parcel_len+j];
             }
-            PostSamp.Zinter[l][j] = (double) (tempsum / (double)nobs);
+            PostSamp.Zinter[l][j] = (float) (tempsum / (double)nobs);
         }
 
     }
@@ -660,7 +660,7 @@ void init_latent_rand(struct Sampling PostSamp, const struct BasisFunc BF, const
                     tempsum += (double)PostSamp.sumX[l] [i*parcel_len+v] * (double)PostSamp.beta[l][v*K+k];
                 }
                 //err = gsl_ran_gaussian(r, sqrt(1.0/PostSamp.err2inv_eps[0]));
-                PostSamp.latent[l][i*K+k] = gsl_ran_gaussian(r, 2.0);//(double)tempsum + err;
+                PostSamp.latent[l][i*K+k] = gsl_ran_gaussian(r, 2.0);//(float)tempsum + err;
                 PostSamp.latentstar[l][i*K+k] = PostSamp.latent[l][i*K+k] * sqrtf(PostSamp.Phi2Inv[k*L+l]) + PostSamp.mustar[l][i*K+k];
                 PostSamp.mean_latent[l][i*K+k] = 0.0;
                 PostSamp.mean_latentstar[l][i*K+k] = 0.0;
@@ -691,7 +691,7 @@ void init_load_rand(struct Sampling PostSamp, struct BasisFunc BF, const int L, 
 
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
-        double * kmmat = (double *)calloc(K*Ml, sizeof(double));
+        float * kmmat = (float *)calloc(K*Ml, sizeof(float));
         for(k=0; k<K; k++){
             for(j=0; j<K; j++){
                 gsl_matrix_set(ete, k, j, PostSamp.latent2[l][k*K+j]);
@@ -745,7 +745,7 @@ void init_phi_rand(struct Sampling PostSamp, const int K,const int L, gsl_rng*r)
 void init_alpha_rand(struct Sampling PostSamp, const struct Inputdata data, const struct BasisFunc BF,
                      const int K, const int L, gsl_rng *r){
     gsl_set_error_handler_off();
-    double s;
+    float s;
     // Initial alpha values
     
     int k, l, m, Ml;
@@ -775,7 +775,7 @@ void init_alpha_rand(struct Sampling PostSamp, const struct Inputdata data, cons
 void init_beta_rand(struct Sampling PostSamp, const struct BasisFunc BF, const struct Inputdata data,
                     const int K, const int L){
     int k, l, i, v, Ml, parcel_len;
-    double s;
+    float s;
     // Initial beta values
     double tempsum;
     for(k=0; k<K; k++){

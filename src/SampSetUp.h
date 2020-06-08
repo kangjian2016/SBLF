@@ -4,116 +4,116 @@
 
 struct Sampling{
     
-    double ** basis2;
-    double ** zb;
-    double ** zb2;
-    double ** xb;
-    double ** xb_test;
-    double ** rxb;
+    float ** basis2;
+    float ** zb;
+    float ** zb2;
+    float ** xb;
+    float ** xb_test;
+    float ** rxb;
     
     // Intercept for outcomes
-    double ** Zinter;
-    double ** mean_Zinter;
+    float ** Zinter;
+    float ** mean_Zinter;
 
     // Theta
-    double ** theta;
-    double ** mean_theta;
+    float ** theta;
+    float ** mean_theta;
     
     // Loading
-    double ** load;
-    double ** loadstar;
-    double ** mean_load;
-    double ** mean_loadstar;
+    float ** load;
+    float ** loadstar;
+    float ** mean_load;
+    float ** mean_loadstar;
     
     // Latent
-    double ** latent;
-    double ** latentstar;
-    double ** latent2;
-    double ** mean_latent;
-    double ** mean_latentstar;
+    float ** latent;
+    float ** latentstar;
+    float ** latent2;
+    float ** mean_latent;
+    float ** mean_latentstar;
     
     // Phi
-    double * Phi2Inv;
-    double * mean_Phi2Inv;
-    double Phi2Inv_a;
-    double Phi2Inv_b;
+    float * Phi2Inv;
+    float * mean_Phi2Inv;
+    float Phi2Inv_a;
+    float Phi2Inv_b;
     
     // Beta
-    double ** beta;
-    double ** betastar;
-    double ** mean_beta;
-    double ** mean_betastar;
+    float ** beta;
+    float ** betastar;
+    float ** mean_beta;
+    float ** mean_betastar;
     
     // Alpha
-    double ** alpha;
-    double ** alphastar;
-    double ** mean_alpha;
-    double ** mean_alphastar;
+    float ** alpha;
+    float ** alphastar;
+    float ** mean_alpha;
+    float ** mean_alphastar;
     
     // XBA, XBAR
-    double ** xba; // X*Baisi*Aalpha
-    double ** xbar; // X*Baisi*Aalpha*Gamma
+    float ** xba; // X*Baisi*Aalpha
+    float ** xbar; // X*Baisi*Aalpha*Gamma
     
     // Mu
-    double ** mustar;
-    double ** mean_mu;
+    float ** mustar;
+    float ** mean_mu;
     
     // Summarized image
-    double ** sumX;
+    float ** sumX;
     
     // Predictor parameters
-    double * gamma;
-    double * mean_gamma;
-    double * mean_gamma_update;
-    double * w;
-    double * mean_w;
-    double w_a;
-    double w_b;
+    float * gamma;
+    float * mean_gamma;
+    float * mean_gamma_update;
+    float * w;
+    float * mean_w;
+    float w_a;
+    float w_b;
     
     // Errors
-    double * err2inv_e;
-    double * err2inv_e_mean;
-    double * err2inv_zeta;
-    double * err2inv_zeta_mean;
-    double * err2inv_eps;
-    double * err2inv_eps_mean;
-    double * err2inv_u;
-    double * err2inv_u_mean;
+    float * err2inv_e;
+    float * err2inv_e_mean;
+    float * err2inv_zeta;
+    float * err2inv_zeta_mean;
+    float * err2inv_eps;
+    float * err2inv_eps_mean;
+    float * err2inv_u;
+    float * err2inv_u_mean;
     
     // prior of errors
-    double err2inv_e_a;
-    double err2inv_e_b;
-    double err2inv_zeta_a;
-    double err2inv_zeta_b;
-    double err2inv_eps_a;
-    double err2inv_eps_b;
-    double err2inv_alpha;
-    double err2inv_load;
-    double err2inv_mu;
-    double err2inv_u_a;
-    double err2inv_u_b;
+    float err2inv_e_a;
+    float err2inv_e_b;
+    float err2inv_zeta_a;
+    float err2inv_zeta_b;
+    float err2inv_eps_a;
+    float err2inv_eps_b;
+    float err2inv_alpha;
+    float err2inv_load;
+    float err2inv_mu;
+    float err2inv_u_a;
+    float err2inv_u_b;
     
     // Testing Set
-    double ** Zinter_test;
-    double ** latent_test;
-    double ** theta_test;
-    double ** outcome_test;
-    double ** Zinter_test_mean;
-    double ** latent_test_mean;
-    double ** theta_test_mean;
-    double ** outcome_test_mean;
-    double ** outcome_test_mean2;
+    float ** Zinter_test;
+    float ** latent_test;
+    float ** theta_test;
+    float ** outcome_test;
+    float ** Zinter_test_mean;
+    float ** latent_test_mean;
+    float ** theta_test_mean;
+    float ** outcome_test_mean;
+    float ** outcome_test_mean2;
     
     // Training Set
-    double ** latent_train;
-    double ** theta_train;
-    double ** outcome_train;
-    double ** latent_train_mean;
-    double ** theta_train_mean;
-    double ** outcome_train_mean;
-    double ** outcome_train_mean2;
-    double ** latent_train_err;
-    double ** theta_train_err;
+    float ** latent_train;
+    float ** theta_train;
+    float ** outcome_train;
+    float ** latent_train_mean;
+    float ** theta_train_mean;
+    float ** outcome_train_mean;
+    float ** outcome_train_mean2;
+    float ** latent_train_err;
+    float ** theta_train_err;
 };
 
 
@@ -124,24 +124,24 @@ struct Sampling setupSamp(const int M, const int nobs, const int nts, const int 
     
     ///// Allocate Memory /////
     // data
-    PostSamp.basis2 = (double **)malloc(L * sizeof(double *));
-    PostSamp.zb = (double **)malloc(L * sizeof(double *));
-    PostSamp.zb2 = (double **)malloc(L * sizeof(double *));
-    PostSamp.xb = (double **)malloc(L * sizeof(double *));
-    PostSamp.rxb = (double **)malloc(L * sizeof(double *));
+    PostSamp.basis2 = (float **)malloc(L * sizeof(float *));
+    PostSamp.zb = (float **)malloc(L * sizeof(float *));
+    PostSamp.zb2 = (float **)malloc(L * sizeof(float *));
+    PostSamp.xb = (float **)malloc(L * sizeof(float *));
+    PostSamp.rxb = (float **)malloc(L * sizeof(float *));
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
-        PostSamp.basis2[l] = (double *)malloc(Ml * Ml * sizeof(double));
-        PostSamp.zb[l] = (double *)malloc(nobs * Ml * sizeof(double));
-        PostSamp.zb2[l] = (double *)malloc(nobs * Ml * sizeof(double));
-        PostSamp.xb[l] = (double *)malloc(nobs * P * Ml * sizeof(double));
-        PostSamp.rxb[l] = (double *)malloc(nobs * Ml * sizeof(double));
+        PostSamp.basis2[l] = (float *)malloc(Ml * Ml * sizeof(float));
+        PostSamp.zb[l] = (float *)malloc(nobs * Ml * sizeof(float));
+        PostSamp.zb2[l] = (float *)malloc(nobs * Ml * sizeof(float));
+        PostSamp.xb[l] = (float *)malloc(nobs * P * Ml * sizeof(float));
+        PostSamp.rxb[l] = (float *)malloc(nobs * Ml * sizeof(float));
     }
     if(nts > 0){
-        PostSamp.xb_test = (double **)malloc(L * sizeof(double *));
+        PostSamp.xb_test = (float **)malloc(L * sizeof(float *));
         for(l=0; l<L; l++){
             Ml = BF.Ml[l];
-            PostSamp.xb_test[l] = (double *)malloc(nts*P*Ml* sizeof(double));
+            PostSamp.xb_test[l] = (float *)malloc(nts*P*Ml* sizeof(float));
         }
     }
     
@@ -149,84 +149,84 @@ struct Sampling setupSamp(const int M, const int nobs, const int nts, const int 
     
     
     // Parameter
-    PostSamp.Zinter = (double **)malloc(L * sizeof(double *));
-    PostSamp.theta = (double **)malloc(L * sizeof(double *));
-    PostSamp.load = (double **)malloc(L * sizeof(double *));
-    PostSamp.loadstar = (double **)malloc(L * sizeof(double *));
-    PostSamp.latent = (double **)malloc(L * sizeof(double *));
-    PostSamp.latentstar = (double **)malloc(L * sizeof(double *));
-    PostSamp.latent2 = (double **)malloc(L * sizeof(double *));
-    PostSamp.beta = (double **)malloc(L * sizeof(double *));
-    PostSamp.betastar = (double **)malloc(L * sizeof(double *));
-    PostSamp.alpha = (double **)malloc(L * sizeof(double *));
-    PostSamp.alphastar = (double **)malloc(L * sizeof(double *));
-    PostSamp.xba = (double **)malloc(L * sizeof(double *));
-    PostSamp.xbar = (double **)malloc(L * sizeof(double *));
-    PostSamp.mustar = (double **)malloc(L * sizeof(double *));
-    PostSamp.sumX = (double **)malloc(L * sizeof(double *));
+    PostSamp.Zinter = (float **)malloc(L * sizeof(float *));
+    PostSamp.theta = (float **)malloc(L * sizeof(float *));
+    PostSamp.load = (float **)malloc(L * sizeof(float *));
+    PostSamp.loadstar = (float **)malloc(L * sizeof(float *));
+    PostSamp.latent = (float **)malloc(L * sizeof(float *));
+    PostSamp.latentstar = (float **)malloc(L * sizeof(float *));
+    PostSamp.latent2 = (float **)malloc(L * sizeof(float *));
+    PostSamp.beta = (float **)malloc(L * sizeof(float *));
+    PostSamp.betastar = (float **)malloc(L * sizeof(float *));
+    PostSamp.alpha = (float **)malloc(L * sizeof(float *));
+    PostSamp.alphastar = (float **)malloc(L * sizeof(float *));
+    PostSamp.xba = (float **)malloc(L * sizeof(float *));
+    PostSamp.xbar = (float **)malloc(L * sizeof(float *));
+    PostSamp.mustar = (float **)malloc(L * sizeof(float *));
+    PostSamp.sumX = (float **)malloc(L * sizeof(float *));
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
         parcel_len = data.parcel_len[l];
-        PostSamp.Zinter[l] = (double *)malloc(parcel_len * sizeof(double));
-        PostSamp.theta[l] = (double *)malloc(Ml * nobs * sizeof(double));
-        PostSamp.load[l] = (double *)malloc(Ml * K * sizeof(double));
-        PostSamp.loadstar[l] = (double *)malloc(Ml * K * sizeof(double));
-        PostSamp.latent[l] = (double *)malloc(nobs * K * sizeof(double));
-        PostSamp.latentstar[l] = (double *)malloc(nobs * K * sizeof(double));
-        PostSamp.latent2[l] = (double *)malloc(K * K * sizeof(double));
-        PostSamp.beta[l] = (double *)malloc(parcel_len * K * sizeof(double));
-        PostSamp.betastar[l] = (double *)malloc(parcel_len * K * sizeof(double));
-        PostSamp.alpha[l] = (double *)malloc(Ml * K * sizeof(double));
-        PostSamp.alphastar[l] = (double *)malloc(Ml * K * sizeof(double));
-        PostSamp.xba[l] = (double *)malloc(nobs*K*P * sizeof(double));
-        PostSamp.xbar[l] = (double *)malloc(nobs*K * sizeof(double));
-        PostSamp.mustar[l] = (double *)malloc(nobs*K * sizeof(double));
-        PostSamp.sumX[l] = (double *)malloc(nobs*parcel_len * sizeof(double));
+        PostSamp.Zinter[l] = (float *)malloc(parcel_len * sizeof(float));
+        PostSamp.theta[l] = (float *)malloc(Ml * nobs * sizeof(float));
+        PostSamp.load[l] = (float *)malloc(Ml * K * sizeof(float));
+        PostSamp.loadstar[l] = (float *)malloc(Ml * K * sizeof(float));
+        PostSamp.latent[l] = (float *)malloc(nobs * K * sizeof(float));
+        PostSamp.latentstar[l] = (float *)malloc(nobs * K * sizeof(float));
+        PostSamp.latent2[l] = (float *)malloc(K * K * sizeof(float));
+        PostSamp.beta[l] = (float *)malloc(parcel_len * K * sizeof(float));
+        PostSamp.betastar[l] = (float *)malloc(parcel_len * K * sizeof(float));
+        PostSamp.alpha[l] = (float *)malloc(Ml * K * sizeof(float));
+        PostSamp.alphastar[l] = (float *)malloc(Ml * K * sizeof(float));
+        PostSamp.xba[l] = (float *)malloc(nobs*K*P * sizeof(float));
+        PostSamp.xbar[l] = (float *)malloc(nobs*K * sizeof(float));
+        PostSamp.mustar[l] = (float *)malloc(nobs*K * sizeof(float));
+        PostSamp.sumX[l] = (float *)malloc(nobs*parcel_len * sizeof(float));
     }
-    PostSamp.Phi2Inv = (double *)calloc(K*L, sizeof(double));
-    PostSamp.gamma = (double *)calloc(P*L, sizeof(double));
-    PostSamp.w = (double *)calloc(L, sizeof(double));
-    PostSamp.err2inv_e = (double *)calloc(1, sizeof(double));
-    PostSamp.err2inv_zeta = (double *)calloc(1, sizeof(double));
-    PostSamp.err2inv_eps = (double *)calloc(1, sizeof(double));
-    PostSamp.err2inv_u = (double *)calloc(L, sizeof(double));
+    PostSamp.Phi2Inv = (float *)calloc(K*L, sizeof(float));
+    PostSamp.gamma = (float *)calloc(P*L, sizeof(float));
+    PostSamp.w = (float *)calloc(L, sizeof(float));
+    PostSamp.err2inv_e = (float *)calloc(1, sizeof(float));
+    PostSamp.err2inv_zeta = (float *)calloc(1, sizeof(float));
+    PostSamp.err2inv_eps = (float *)calloc(1, sizeof(float));
+    PostSamp.err2inv_u = (float *)calloc(L, sizeof(float));
     
     
     // Posterior Mean
-    PostSamp.mean_Zinter = (double **)malloc(L * sizeof(double *));
-    PostSamp.mean_theta = (double **)malloc(L * sizeof(double *));
-    PostSamp.mean_load = (double **)malloc(L * sizeof(double *));
-    PostSamp.mean_loadstar = (double **)malloc(L * sizeof(double *));
-    PostSamp.mean_latent = (double **)malloc(L * sizeof(double *));
-    PostSamp.mean_latentstar = (double **)malloc(L * sizeof(double *));
-    PostSamp.mean_beta = (double **)malloc(L * sizeof(double *));
-    PostSamp.mean_betastar = (double **)malloc(L * sizeof(double *));
-    PostSamp.mean_alpha = (double **)malloc(L * sizeof(double *));
-    PostSamp.mean_alphastar = (double **)malloc(L * sizeof(double *));
-    PostSamp.mean_mu = (double **)malloc(L * sizeof(double *));
+    PostSamp.mean_Zinter = (float **)malloc(L * sizeof(float *));
+    PostSamp.mean_theta = (float **)malloc(L * sizeof(float *));
+    PostSamp.mean_load = (float **)malloc(L * sizeof(float *));
+    PostSamp.mean_loadstar = (float **)malloc(L * sizeof(float *));
+    PostSamp.mean_latent = (float **)malloc(L * sizeof(float *));
+    PostSamp.mean_latentstar = (float **)malloc(L * sizeof(float *));
+    PostSamp.mean_beta = (float **)malloc(L * sizeof(float *));
+    PostSamp.mean_betastar = (float **)malloc(L * sizeof(float *));
+    PostSamp.mean_alpha = (float **)malloc(L * sizeof(float *));
+    PostSamp.mean_alphastar = (float **)malloc(L * sizeof(float *));
+    PostSamp.mean_mu = (float **)malloc(L * sizeof(float *));
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
         parcel_len = data.parcel_len[l];
-        PostSamp.mean_Zinter[l] = (double *)malloc(parcel_len * sizeof(double));
-        PostSamp.mean_theta[l] = (double *)malloc(Ml * nobs * sizeof(double));
-        PostSamp.mean_load[l] = (double *)malloc(Ml * K * sizeof(double));
-        PostSamp.mean_loadstar[l] = (double *)malloc(Ml * K * sizeof(double));
-        PostSamp.mean_latent[l] = (double *)malloc(nobs * K * sizeof(double));
-        PostSamp.mean_latentstar[l] = (double *)malloc(nobs * K * sizeof(double));
-        PostSamp.mean_beta[l] = (double *)malloc(parcel_len * K * sizeof(double));
-        PostSamp.mean_betastar[l] = (double *)malloc(parcel_len * K * sizeof(double));
-        PostSamp.mean_alpha[l] = (double *)malloc(Ml * K * sizeof(double));
-        PostSamp.mean_alphastar[l] = (double *)malloc(Ml * K * sizeof(double));
-        PostSamp.mean_mu[l] = (double *)malloc(nobs * K * sizeof(double));
+        PostSamp.mean_Zinter[l] = (float *)malloc(parcel_len * sizeof(float));
+        PostSamp.mean_theta[l] = (float *)malloc(Ml * nobs * sizeof(float));
+        PostSamp.mean_load[l] = (float *)malloc(Ml * K * sizeof(float));
+        PostSamp.mean_loadstar[l] = (float *)malloc(Ml * K * sizeof(float));
+        PostSamp.mean_latent[l] = (float *)malloc(nobs * K * sizeof(float));
+        PostSamp.mean_latentstar[l] = (float *)malloc(nobs * K * sizeof(float));
+        PostSamp.mean_beta[l] = (float *)malloc(parcel_len * K * sizeof(float));
+        PostSamp.mean_betastar[l] = (float *)malloc(parcel_len * K * sizeof(float));
+        PostSamp.mean_alpha[l] = (float *)malloc(Ml * K * sizeof(float));
+        PostSamp.mean_alphastar[l] = (float *)malloc(Ml * K * sizeof(float));
+        PostSamp.mean_mu[l] = (float *)malloc(nobs * K * sizeof(float));
     }
-    PostSamp.mean_Phi2Inv = (double *)calloc(K*L, sizeof(double));
-    PostSamp.mean_gamma = (double *)calloc(P*L, sizeof(double));
-    PostSamp.mean_gamma_update = (double *)calloc(P*L, sizeof(double));
-    PostSamp.mean_w = (double *)calloc(L, sizeof(double));
-    PostSamp.err2inv_e_mean = (double *)calloc(1, sizeof(double));
-    PostSamp.err2inv_zeta_mean = (double *)calloc(1, sizeof(double));
-    PostSamp.err2inv_eps_mean = (double *)calloc(1, sizeof(double));
-    PostSamp.err2inv_u_mean = (double *)calloc(L, sizeof(double));
+    PostSamp.mean_Phi2Inv = (float *)calloc(K*L, sizeof(float));
+    PostSamp.mean_gamma = (float *)calloc(P*L, sizeof(float));
+    PostSamp.mean_gamma_update = (float *)calloc(P*L, sizeof(float));
+    PostSamp.mean_w = (float *)calloc(L, sizeof(float));
+    PostSamp.err2inv_e_mean = (float *)calloc(1, sizeof(float));
+    PostSamp.err2inv_zeta_mean = (float *)calloc(1, sizeof(float));
+    PostSamp.err2inv_eps_mean = (float *)calloc(1, sizeof(float));
+    PostSamp.err2inv_u_mean = (float *)calloc(L, sizeof(float));
     
     ///// Priors
     PostSamp.err2inv_alpha = 1.0f;
@@ -248,53 +248,53 @@ struct Sampling setupSamp(const int M, const int nobs, const int nts, const int 
     
     ///// Testing
     if(nts > 0){
-        PostSamp.Zinter_test = (double **)malloc(L * sizeof(double *));
-        PostSamp.latent_test = (double **)malloc(L * sizeof(double *));
-        PostSamp.theta_test = (double **)malloc(L * sizeof(double *));
-        PostSamp.outcome_test = (double **)malloc(L * sizeof(double *));
-        PostSamp.Zinter_test_mean = (double **)malloc(L * sizeof(double *));
-        PostSamp.latent_test_mean = (double **)malloc(L * sizeof(double *));
-        PostSamp.theta_test_mean = (double **)malloc(L * sizeof(double *));
-        PostSamp.outcome_test_mean = (double **)malloc(L * sizeof(double *));
-        PostSamp.outcome_test_mean2 = (double **)malloc(L * sizeof(double *));
+        PostSamp.Zinter_test = (float **)malloc(L * sizeof(float *));
+        PostSamp.latent_test = (float **)malloc(L * sizeof(float *));
+        PostSamp.theta_test = (float **)malloc(L * sizeof(float *));
+        PostSamp.outcome_test = (float **)malloc(L * sizeof(float *));
+        PostSamp.Zinter_test_mean = (float **)malloc(L * sizeof(float *));
+        PostSamp.latent_test_mean = (float **)malloc(L * sizeof(float *));
+        PostSamp.theta_test_mean = (float **)malloc(L * sizeof(float *));
+        PostSamp.outcome_test_mean = (float **)malloc(L * sizeof(float *));
+        PostSamp.outcome_test_mean2 = (float **)malloc(L * sizeof(float *));
         for(l=0; l<L; l++){
             Ml = BF.Ml[l];
             parcel_len = data.parcel_len[l];
-            PostSamp.Zinter_test[l] = (double *)malloc(parcel_len * sizeof(double));
-            PostSamp.latent_test[l] = (double *)malloc(nts * K * sizeof(double));
-            PostSamp.theta_test[l] = (double *)malloc(Ml * nts * sizeof(double));
-            PostSamp.outcome_test[l] = (double *)malloc(parcel_len * nts * sizeof(double));
-            PostSamp.Zinter_test_mean[l] = (double *)malloc(parcel_len * sizeof(double));
-            PostSamp.latent_test_mean[l] = (double *)malloc(nts * K * sizeof(double));
-            PostSamp.theta_test_mean[l] = (double *)malloc(Ml * nts * sizeof(double));
-            PostSamp.outcome_test_mean[l] = (double *)malloc(parcel_len * nts * sizeof(double));
-            PostSamp.outcome_test_mean2[l] = (double *)malloc(parcel_len * nts * sizeof(double));
+            PostSamp.Zinter_test[l] = (float *)malloc(parcel_len * sizeof(float));
+            PostSamp.latent_test[l] = (float *)malloc(nts * K * sizeof(float));
+            PostSamp.theta_test[l] = (float *)malloc(Ml * nts * sizeof(float));
+            PostSamp.outcome_test[l] = (float *)malloc(parcel_len * nts * sizeof(float));
+            PostSamp.Zinter_test_mean[l] = (float *)malloc(parcel_len * sizeof(float));
+            PostSamp.latent_test_mean[l] = (float *)malloc(nts * K * sizeof(float));
+            PostSamp.theta_test_mean[l] = (float *)malloc(Ml * nts * sizeof(float));
+            PostSamp.outcome_test_mean[l] = (float *)malloc(parcel_len * nts * sizeof(float));
+            PostSamp.outcome_test_mean2[l] = (float *)malloc(parcel_len * nts * sizeof(float));
         }
     }
     
     
     ///// Training
-    PostSamp.latent_train = (double **)malloc(L * sizeof(double *));
-    PostSamp.theta_train = (double **)malloc(L * sizeof(double *));
-    PostSamp.outcome_train = (double **)malloc(L * sizeof(double *));
-    PostSamp.latent_train_mean = (double **)malloc(L * sizeof(double *));
-    PostSamp.theta_train_mean = (double **)malloc(L * sizeof(double *));
-    PostSamp.outcome_train_mean = (double **)malloc(L * sizeof(double *));
-    PostSamp.outcome_train_mean2 = (double **)malloc(L * sizeof(double *));
-    PostSamp.latent_train_err = (double **)malloc(L * sizeof(double *));
-    PostSamp.theta_train_err = (double **)malloc(L * sizeof(double *));
+    PostSamp.latent_train = (float **)malloc(L * sizeof(float *));
+    PostSamp.theta_train = (float **)malloc(L * sizeof(float *));
+    PostSamp.outcome_train = (float **)malloc(L * sizeof(float *));
+    PostSamp.latent_train_mean = (float **)malloc(L * sizeof(float *));
+    PostSamp.theta_train_mean = (float **)malloc(L * sizeof(float *));
+    PostSamp.outcome_train_mean = (float **)malloc(L * sizeof(float *));
+    PostSamp.outcome_train_mean2 = (float **)malloc(L * sizeof(float *));
+    PostSamp.latent_train_err = (float **)malloc(L * sizeof(float *));
+    PostSamp.theta_train_err = (float **)malloc(L * sizeof(float *));
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
         parcel_len = data.parcel_len[l];
-        PostSamp.latent_train[l] = (double *)malloc(nobs * K * sizeof(double));
-        PostSamp.theta_train[l] = (double *)malloc(Ml * nobs * sizeof(double));
-        PostSamp.outcome_train[l] = (double *)malloc(parcel_len * nobs * sizeof(double));
-        PostSamp.latent_train_mean[l] = (double *)malloc(nobs * K * sizeof(double));
-        PostSamp.theta_train_mean[l] = (double *)malloc(Ml * nobs * sizeof(double));
-        PostSamp.outcome_train_mean[l] = (double *)malloc(parcel_len * nobs * sizeof(double));
-        PostSamp.outcome_train_mean2[l] = (double *)malloc(parcel_len * nobs * sizeof(double));
-        PostSamp.latent_train_err[l] = (double *)malloc(nobs * K * sizeof(double));
-        PostSamp.theta_train_err[l] = (double *)malloc(Ml * nobs * sizeof(double));
+        PostSamp.latent_train[l] = (float *)malloc(nobs * K * sizeof(float));
+        PostSamp.theta_train[l] = (float *)malloc(Ml * nobs * sizeof(float));
+        PostSamp.outcome_train[l] = (float *)malloc(parcel_len * nobs * sizeof(float));
+        PostSamp.latent_train_mean[l] = (float *)malloc(nobs * K * sizeof(float));
+        PostSamp.theta_train_mean[l] = (float *)malloc(Ml * nobs * sizeof(float));
+        PostSamp.outcome_train_mean[l] = (float *)malloc(parcel_len * nobs * sizeof(float));
+        PostSamp.outcome_train_mean2[l] = (float *)malloc(parcel_len * nobs * sizeof(float));
+        PostSamp.latent_train_err[l] = (float *)malloc(nobs * K * sizeof(float));
+        PostSamp.theta_train_err[l] = (float *)malloc(Ml * nobs * sizeof(float));
     }
     
     // Compute basis^T*basis

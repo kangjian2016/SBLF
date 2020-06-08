@@ -41,7 +41,7 @@ void Zinter_samp(int nobs, int L, int K, struct Sampling PostSamp, struct Inputd
                 tempsum += (double)data.Zl[l][k*parcel_len+i] - tmp;
             }
             tempsum *= var2;
-            PostSamp.Zinter[l][i] = gsl_ran_gaussian(r, sqrtf((double)var)) + tempsum ;
+            PostSamp.Zinter[l][i] = gsl_ran_gaussian(r, sqrtf((float)var)) + tempsum ;
         }
     }
 

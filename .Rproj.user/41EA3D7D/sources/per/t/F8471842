@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591630458973.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4084420619",
+    "id" : "F8471842",
+    "lastKnownWriteTime" : 1591627481,
+    "last_content_update" : 1591627481,
+    "path" : "~/Desktop/ImageOnImageRegression-original/ImageOnImageRegression/RCode/SBLF/src/csblf.c",
+    "project_path" : "src/csblf.c",
+    "properties" : {
+        "cursorPosition" : "64,54",
+        "scrollLine" : "57"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "c"
+}

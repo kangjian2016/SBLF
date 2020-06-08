@@ -163,7 +163,7 @@ void samp_mean(int L, int K, int nobs, int nts, int P,
 
 void output_mean(const int L, const int K, const int nobs, const int nts, const int P, const char * outpath, struct Sampling PostSamp, const struct Inputdata data, const struct BasisFunc BF, const int iter){
     int i, j, k, l, Ml, parcel_len;
-    double niter = (double)iter;
+    float niter = (float)iter;
     // outcome_test
     if(nts > 0){
         char *outts = (char *)calloc(500,sizeof(char));

@@ -19,7 +19,7 @@ void phi2inv_samp(const int K, const int nobs, const int L,
     for(l=0; l<L; l++){
         Ml = BF.Ml[l];
         parcel_len = data.parcel_len[l];
-        post_a = PostSamp.Phi2Inv_a + 0.5 * (double)(nobs);
+        post_a = PostSamp.Phi2Inv_a + 0.5 * (float)(nobs);
         
         for(k=0; k<K; k++){
             post_b = PostSamp.Phi2Inv_b;
