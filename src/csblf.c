@@ -18,7 +18,6 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_eigen.h>
 
-#include "arms.h"
 #include "gslCompute.h"
 #include "MVNsampling.h"
 #include "Input.h"
@@ -47,7 +46,7 @@
 #include <Rinternals.h>
 //#include <Rmath.h>
 
-SEXP csblf(SEXP outputpath){
+SEXP csblf(SEXP outputpath, SEXP seed, SEXP nburnin, SEXP niter){
     gsl_set_error_handler_off();
     //////////////////////////////////////////////////////////
     ///// GSL Random Number Generator Initialization /////
@@ -57,7 +56,7 @@ SEXP csblf(SEXP outputpath){
     gsl_rng_env_setup();
     T = gsl_rng_default;
     r = gsl_rng_alloc(T);
-    gsl_rng_set(r, 123);
+    gsl_rng_set(r, asInteger(seed));
     //////////////////////////////////////////////////////////
     ///// Input Data /////
     //////////////////////////////////////////////////////////
@@ -98,8 +97,8 @@ SEXP csblf(SEXP outputpath){
     int K ;
     K = strcmp(dataSource, "Simulation") == 0 ? 20 : 9;
     // Length of chain
-    int iter = 10000; // total iterations
-    int burnin = 5000; // iterations after burnin
+    int iter = asInteger(niter); // total iterations
+    int burnin = asInteger(nburnin); // iterations after burnin
     // Parameters
     struct Sampling PostSamp;
     PostSamp = setupSamp(M, nobs, nts, L, P, K, BF, data);

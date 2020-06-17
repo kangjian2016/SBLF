@@ -4,7 +4,16 @@
 \alias{SBLF}
 \title{Fit Spatial Bayesian Latent Factor Models}
 \usage{
-SBLF(xtrain, xtest, ztrain, ztest, voxel_loc)
+SBLF(
+  xtrain,
+  xtest,
+  ztrain,
+  ztest,
+  voxel_loc,
+  seed = NULL,
+  burnin = NULL,
+  iter = NULL
+)
 }
 \arguments{
 \item{xtrain}{training data set of imaging predictors. Sample size is \code{ntrain * (P * image_len)}}
@@ -16,31 +25,40 @@ SBLF(xtrain, xtest, ztrain, ztest, voxel_loc)
 \item{ztest}{test data set of imaging outcomes. Sample size is \code{((ntotal-ntrain) * image_len)}}
 
 \item{voxel_loc}{matrix of voxel coordinates.}
+
+\item{seed}{integer random seed value}
+
+\item{burnin}{integer number of burnin draws}
+
+\item{iter}{integer total number of draws}
 }
 \value{
 A list which contains
+\itemize{
+\item{draws: }{A named list of posterior draws}
+\item{posterior_means: }{A named list of posterior means}
+\item{data: }{A named list of data sets used for model fitting}
+}
 }
 \description{
 Use this function to fit spatial Bayesian latent factor models given
-the prepared input data sets. Please also comment on the important
-output the user should be expecting.
+the prepared input data sets.
 }
 \details{
 The parameters prefixed with "x" are imaging predictor data, and
 the parameters prefixed with "z" are imaging outcomes.
 
-Specify important details to the user about the use
-of this function. Please comment.
+Sometimes the model fitting will fail, returning NaN in the output.
+This is usually because a parameter was sampled too close to a boundary.
+Try running the model multiple times and see if the results improve.
 
 The function expects all data to be entered as matrices with the dimensions
 outlined in each of the parameter arguments.
 }
 \examples{
 \donttest{
-
+  mod = SBLF(xtrain, xtest, ztrain, ztest, voxel_loc, seed = 1234, burnin = 250, iter = 500)
+  mse(mod)
 }
 
-}
-\references{
-Please add your paper reference.
 }

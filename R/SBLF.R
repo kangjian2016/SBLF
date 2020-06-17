@@ -1,47 +1,53 @@
 
-Rcsblf <- function(outpath) {
-  .Call("csblf", as.character(outpath))
+Rcsblf <- function(outpath, seed, burnin, iter) {
+  .Call("csblf", as.character(outpath), as.integer(seed), as.integer(burnin), as.integer(iter))
 }
 
 #' Fit Spatial Bayesian Latent Factor Models
 #'
 #' Use this function to fit spatial Bayesian latent factor models given
-#' the prepared input data sets. Please also comment on the important
-#' output the user should be expecting.
+#' the prepared input data sets.
 #' 
 #' The parameters prefixed with "x" are imaging predictor data, and
 #' the parameters prefixed with "z" are imaging outcomes.
+#' 
+#' Sometimes the model fitting will fail, returning NaN in the output.
+#' This is usually because a parameter was sampled too close to a boundary.
+#' Try running the model multiple times and see if the results improve.
 #' 
 #' @param xtrain training data set of imaging predictors. Sample size is `ntrain * (P * image_len)`
 #' @param xtest test data set of imaging predictors. sample size is `(ntotal-ntrain) * (P * image_len)`
 #' @param ztrain training data set of imaging outcomes. Sample size is `(ntrain * image_len)`
 #' @param ztest test data set of imaging outcomes. Sample size is `((ntotal-ntrain) * image_len)`
 #' @param voxel_loc matrix of voxel coordinates.
+#' @param seed integer random seed value
+#' @param burnin integer number of burnin draws
+#' @param iter integer total number of draws
 #'
-#' @details Specify important details to the user about the use
-#' of this function. Please comment.
-#' 
-#' The function expects all data to be entered as matrices with the dimensions
+#' @details The function expects all data to be entered as matrices with the dimensions
 #' outlined in each of the parameter arguments.
 #' 
-#' @references Please add your paper reference.
 #' 
 #' @return A list which contains
 #' \itemize{
-#'  \item{"pred_train"}{}
-#'  \item{"pred_test"}{}
-#'  \item{"latent"}{}
-#'  \item{"draws"}{}
+#'  \item{draws: }{A named list of posterior draws}
+#'  \item{posterior_means: }{A named list of posterior means}
+#'  \item{data: }{A named list of data sets used for model fitting}
 #' }
 #'
 #' @examples 
 #' \donttest{
-#' 
+#'   mod = SBLF(xtrain, xtest, ztrain, ztest, voxel_loc, seed = 1234, burnin = 250, iter = 500)
+#'   mse(mod)
 #' }
 #'
 #' @export
 
-SBLF <- function(xtrain, xtest, ztrain, ztest, voxel_loc) {
+SBLF <- function(xtrain, xtest, ztrain, ztest, voxel_loc, seed = NULL, burnin = NULL, iter = NULL) {
+  
+  if(is.null(seed)) { seed = sample(1:100,1) }
+  if(is.null(burnin)) { burnin = 250 }
+  if(is.null(iter)) { iter = 500 }
   
   temp_path = paste(tempdir(), '/', sep = '')
   
@@ -76,7 +82,7 @@ SBLF <- function(xtrain, xtest, ztrain, ztest, voxel_loc) {
   write.table(x = ROI_sizes, file = paste(data_path, 'ROI_sizes.txt', sep = '/'), row.names = FALSE, col.names = FALSE)
   cat('test')
   #Call c routine, which writes results to tmp/Result/
-  creturn = Rcsblf(temp_path)
+  creturn = Rcsblf(temp_path, seed, burnin, iter)
   
   #read results into R from tmp/Result/
   results = vector(mode = 'list', length = length(list.files(result_path)))
@@ -91,26 +97,14 @@ SBLF <- function(xtrain, xtest, ztrain, ztest, voxel_loc) {
     })
   names(results) <- Xnames
   
-  pred_train = results[['PostMean_Out_train']]
-  pred_test = results[['PostMean_Out_test']]
-  latent = results[['PostMean_Latent']]
-  draws = results
-  
-  err_train = pred_train - ztrain
-  mse_train = mean(err_train^2)  
-  
-  err_test <- pred_test - ztest
-  mspe_test <- mean(err_test^2)
-  
-  err <- matrix(c(mse_train, mspe_test), ncol=2)
-  colnames(err) <- c("MSE(training)", "MSPE(test)")
+  draws = results[-grep('Mean', names(results))]
+  posterior_means = results[grep('Mean', names(results))]
+  data = list(xtrain = xtrain, xtest = xtest, ztrain = ztrain, 
+              ztest = ztest, voxel_loc = voxel_loc)
   
   # return results
-  return(list(
-    err = err, 
-    pred_train = pred_train, 
-    pred_test = pred_test, 
-    latent = latent
-  ))
+  return_list = list(draws = draws, posterior_means = posterior_means, data = data)
+  class(return_list) <- 'SBLF'
+  return(return_list)
   
 }
