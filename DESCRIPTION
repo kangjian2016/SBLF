@@ -1,7 +1,7 @@
 Package: SBLF
 Type: Package
 Title: Fit Spatial Bayesian Latent Factor Models
-Version: 1.1.0.009
+Version: 1.0.0.9000
 Authors@R:
     c(
     person(given = "Cui", family = "Guo", role = "aut", email = "cuiguo@umich.edu"),
