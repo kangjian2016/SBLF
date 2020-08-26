@@ -48,10 +48,6 @@ the prepared input data sets.
 The parameters prefixed with "x" are imaging predictor data, and
 the parameters prefixed with "z" are imaging outcomes.
 
-Sometimes the model fitting will fail, returning NaN in the output.
-This is usually because a parameter was sampled too close to a boundary.
-Try running the model multiple times and see if the results improve.
-
 The function expects all data to be entered as matrices with the dimensions
 outlined in each of the parameter arguments.
 }

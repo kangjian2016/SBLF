@@ -11,10 +11,6 @@ Rcsblf <- function(outpath, seed, burnin, iter) {
 #' The parameters prefixed with "x" are imaging predictor data, and
 #' the parameters prefixed with "z" are imaging outcomes.
 #' 
-#' Sometimes the model fitting will fail, returning NaN in the output.
-#' This is usually because a parameter was sampled too close to a boundary.
-#' Try running the model multiple times and see if the results improve.
-#' 
 #' @param xtrain training data set of imaging predictors. Sample size is `ntrain * (P * image_len)`
 #' @param xtest test data set of imaging predictors. sample size is `(ntotal-ntrain) * (P * image_len)`
 #' @param ztrain training data set of imaging outcomes. Sample size is `(ntrain * image_len)`
